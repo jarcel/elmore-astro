@@ -1,0 +1,33 @@
+---
+import Layout from "../../layouts/Layout.astro"
+import BookTile from "../../components/BookTile.astro"
+import { fetchBooks } from "../../utils/fetchBooks"
+
+const books = await fetchBooks("asc")
+---
+
+<Layout title="Books">
+  <section class="media-grid book-list">
+    {
+      books.length > 0 ? (
+        books.map(
+          (book: {
+            documentId: string
+            Title: string
+            Year: number
+            Thumbnail?: { url: string }
+          }) => (
+            <BookTile
+              key={book.documentId}
+              title={book.Title}
+              year={book.Year}
+              thumbnailUrl={book.Thumbnail?.url || "/default-thumbnail.jpg"}
+            />
+          )
+        )
+      ) : (
+        <p>No books available.</p>
+      )
+    }
+  </section>
+</Layout>
