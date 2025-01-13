@@ -1,0 +1,20 @@
+---
+export interface BookProps {
+  title: string
+  year: number
+  thumbnailUrl: string
+}
+
+const { title, year, thumbnailUrl } = Astro.props
+---
+
+<article class="tile book-tile">
+  <img
+    src={thumbnailUrl}
+    alt={`Thumbnail of ${title}`}
+    class="book-thumbnail"
+  />
+  <a href={`/books/${title.toLowerCase().replace(/\s/g, "-")}`}>
+    <span class="title">{title}</span>
+  </a>
+</article>
