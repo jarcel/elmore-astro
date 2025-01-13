@@ -1,0 +1,72 @@
+---
+export interface FooterLinkProps {
+  href: string
+  label: string
+}
+
+const { href, label } = Astro.props
+---
+
+<div class="footer-link">
+  <a href={href}>
+    <span>{label}</span>
+  </a>
+</div>
+
+<style lang="scss">
+  @use "../styles/variables.scss" as vars;
+  .footer-link {
+    position: relative;
+    background: vars.$el-pink;
+    height: 10.4rem;
+    @media (min-width: vars.$screen-sm) {
+      height: 16rem;
+    }
+    @media (min-width: vars.$screen-md) {
+      height: 26rem;
+    }
+    a {
+      display: block;
+      text-decoration: none;
+      text-transform: uppercase;
+      position: absolute;
+      font-weight: 900;
+      color: white;
+      margin: 0;
+      top: 0;
+      left: 0;
+      width: 100%;
+      bottom: 0;
+      z-index: 1;
+      span {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        text-align: center;
+        transform: translateY(-50%) translateX(-50%);
+        font-size: 4rem;
+        line-height: 3rem;
+
+        @media (min-width: vars.$screen-sm) {
+          font-size: 7rem;
+          line-height: 6rem;
+        }
+        @media (min-width: vars.$screen-md) {
+          font-size: 10rem;
+          line-height: 9rem;
+        }
+      }
+    }
+    &:nth-of-type(2) {
+      background: lighten(vars.$el-pink, 3%);
+    }
+    &:nth-of-type(3) {
+      background: lighten(vars.$el-pink, 8%);
+    }
+    &:nth-of-type(4) {
+      background: lighten(vars.$el-pink, 13%);
+    }
+  }
+</style>
