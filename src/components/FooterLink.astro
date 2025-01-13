@@ -15,6 +15,7 @@ const { href, label } = Astro.props
 
 <style lang="scss">
   @use "../styles/variables.scss" as vars;
+  @use "sass:color";
   .footer-link {
     position: relative;
     background: vars.$el-pink;
@@ -60,13 +61,13 @@ const { href, label } = Astro.props
       }
     }
     &:nth-of-type(2) {
-      background: lighten(vars.$el-pink, 3%);
+      background: color.adjust(vars.$el-pink, $lightness: 3%);
     }
     &:nth-of-type(3) {
-      background: lighten(vars.$el-pink, 8%);
+      background: color.adjust(vars.$el-pink, $lightness: 8%);
     }
     &:nth-of-type(4) {
-      background: lighten(vars.$el-pink, 13%);
+      background: color.adjust(vars.$el-pink, $lightness: 13%);
     }
   }
 </style>
