@@ -3,18 +3,36 @@ export interface BookProps {
   title: string
   year: number
   thumbnailUrl: string
+  index?: number
 }
 
-const { title, year, thumbnailUrl } = Astro.props
+const { title, year, thumbnailUrl, index = 0 } = Astro.props
 ---
 
-<article class="tile book-tile">
+<article class="tile book-tile" style={`animation-delay: ${index * 0.1}s`}>
   <img
     src={thumbnailUrl}
     alt={`Thumbnail of ${title}`}
     class="book-thumbnail"
+    decoding="async"
   />
   <a href={`/books/${title.toLowerCase().replace(/\s/g, "-")}`}>
     <span class="title">{title}</span>
   </a>
 </article>
+
+<style lang="scss">
+  @use "../styles/variables.scss" as variables;
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  .book-tile {
+    opacity: 0;
+    animation: fadeIn 0.6s variables.$nice-bezier forwards;
+  }
+</style>
