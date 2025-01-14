@@ -1,0 +1,79 @@
+---
+const { currentSection = "", primaryColor = "#FFF", lastVal = 0 } = Astro.props
+
+// Navigation links
+const navLinks = [
+  { id: "home-link", label: "Home", href: "/" },
+  { id: "nl-dutch", label: "Dutch", href: "/dutch" },
+  { id: "nl-books", label: "Books", href: "/books" },
+  { id: "nl-films", label: "Film", href: "/film" },
+  { id: "nl-news", label: "News", href: "/news" },
+]
+---
+
+<header class="mast">
+  <!-- Signature Link -->
+  <a href="/" class="signature"> </a>
+
+  <!-- Current Section -->
+  {
+    currentSection && (
+      <a href={`/${currentSection.toLowerCase()}`} class="current-section">
+        <span style={`color: ${primaryColor}`}>{currentSection}</span>
+      </a>
+    )
+  }
+
+  <!-- Navigation -->
+  <nav class="menu-pane" id="menu">
+    <ul id="menu-links">
+      {
+        navLinks.map((link) => (
+          <li>
+            <a id={link.id} href={link.href}>
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <!-- Hamburger Icon -->
+    <button
+      id="menu-toggle"
+      class="nav-icon"
+      aria-expanded="false"
+      aria-label="Open navigation menu"
+    >
+      <span style={`background: ${primaryColor}`}></span>
+      <span style={`background: ${primaryColor}`}></span>
+      <span style={`background: ${primaryColor}`}></span>
+      <span style={`background: ${primaryColor}`}></span>
+    </button>
+  </nav>
+</header>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const menuToggle = document.getElementById("menu-toggle")
+    const menu = document.getElementById("menu")
+    let isNavOpen = false
+
+    menuToggle?.addEventListener("click", () => {
+      isNavOpen = !isNavOpen
+
+      // Toggle menu visibility
+      menu?.classList.toggle("open", isNavOpen)
+
+      // Toggle body scrolling
+      document.body.style.overflow = isNavOpen ? "hidden" : "auto"
+
+      // Update button aria attributes
+      menuToggle.setAttribute("aria-expanded", isNavOpen.toString())
+      menuToggle.setAttribute(
+        "aria-label",
+        isNavOpen ? "Close navigation menu" : "Open navigation menu"
+      )
+    })
+  })
+</script>

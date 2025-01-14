@@ -1,0 +1,305 @@
+@use './variables';
+
+.signature {
+  display: inline-block;
+  margin: 2.0rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 132px;
+  height: 70px;
+  z-index: 3;
+  background: url('/images/el-sig-dutch.svg') top left no-repeat;
+  background-size: cover;
+  transition: left .3s variables.$nice-bezier;
+
+  @media (min-width: variables.$screen-sm) {
+    width: 226px;
+    height: 120px;
+  }
+
+  .news & {
+    @media (min-width: variables.$screen-md) {
+      position: fixed;
+    }
+  }
+
+  .book:not(.charlie-martz-other-stories) &,
+  .film & .book-index &,
+  .film-index & {
+    background: url('/images/el-sig.svg') top left no-repeat;
+    background-size: cover;
+  }
+
+  .book-index &,
+  .film-index & {
+    left: -300px;
+  }
+}
+
+.current-section {
+  display: none;
+  position: fixed;
+  top: 2.0rem;
+  right: 8.5rem;
+  background: variables.$el-pink;
+  width: 150px;
+  font-weight: 900;
+  height: 60px;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  color: variables.$body-grey;
+  font-size: 1.8rem;
+  z-index: 3;
+
+  span {
+    position: relative;
+    display: block;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  @media (min-width: variables.$screen-sm) {
+    display: block;
+  }
+}
+
+.menu-pane {
+  position: fixed;
+  top: 2.0rem;
+  right: 2.0rem;
+  background: variables.$el-pink;
+  margin-left: 5px;
+  transition: all .3s ease-in-out;
+  width: 60px;
+  height: 60px;
+  min-height: 60px;
+  z-index: 5;
+  backface-visibility: hidden;
+
+  #menu-links {
+    position: fixed;
+    margin: 0;
+    top: 50%;
+    left: 50%;
+    opacity: 0;
+    transform: translateX(-50%) translateY(-50%);
+    transition: all .2s variables.$nice-bezier, visibility 0s linear .3s;
+    visibility: hidden;
+    list-style: none;
+    padding: 0;
+    padding-top: 30px;
+
+    @media (min-width: variables.$screen-sm) {}
+
+    @media (min-width: variables.$screen-md) {
+      padding-top: 100px;
+    }
+
+    li {
+      position: relative;
+      list-style: none;
+      text-align: center;
+      line-height: 4.0rem;
+
+      @media (min-width: variables.$screen-sm) {
+        line-height: 5.0rem;
+      }
+
+      @media (min-width: variables.$screen-md) {
+        line-height: 6.0rem;
+      }
+
+      a {
+        opacity: 0;
+        position: relative;
+        left: 90%;
+        color: white;
+        font-weight: 900;
+        animation: navAnimationRev 0.2s;
+        font-size: 5rem;
+        text-transform: uppercase;
+        text-decoration: none;
+
+        @media (min-width: variables.$screen-sm) {
+          font-size: 7rem;
+        }
+
+        @media (min-width: variables.$screen-md) {
+          font-size: 8rem;
+        }
+
+        &#home-link {
+          text-indent: -999rem;
+          position: absolute;
+          width: 140px;
+          height: 70px;
+          left: -65px;
+          top: -70px;
+          transform: rotate(-5deg);
+          transition: opacity .3s variables.$nice-bezier;
+          background: url('/images/sig-sprite-white.svg') no-repeat;
+          background-position: 0 0;
+          background-size: auto 100%;
+
+          @media (min-width: variables.$screen-sm) {
+            width: 228px;
+            height: 114px;
+            left: -100px;
+            top: -115px;
+          }
+        }
+
+        &:hover {
+          opacity: .6;
+        }
+      }
+    }
+  }
+
+  &.open {
+    top: 0rem;
+    right: 0rem;
+    bottom: 0rem;
+    min-height: 100%;
+    background: rgba(variables.$el-pink, .95) !important;
+    width: 100%;
+    margin: 0;
+
+    #menu-links {
+      transition: all .2s variables.$nice-bezier .3s, visibility 0s linear .3s;
+      opacity: 1;
+      visibility: visible;
+
+      li {
+        a {
+          &#nl-dutch {
+            animation: ease-out navAnimation .25s forwards .3s;
+          }
+
+          &#nl-books {
+            animation: ease-out navAnimation .25s forwards .4s;
+          }
+
+          &#nl-films {
+            animation: ease-out navAnimation .25s forwards .5s;
+          }
+
+          &#nl-news {
+            animation: ease-out navAnimation .25s forwards .6s;
+          }
+
+          &#home-link {
+            opacity: 1;
+            transition: opacity .3s variables.$nice-bezier;
+            animation: signIt 1.3s steps(62) forwards .3s;
+
+            @media (min-width: variables.$screen-sm) {
+              transition: opacity .3s variables.$nice-bezier;
+              animation: signItLarge 1.3s steps(62) forwards .3s;
+            }
+          }
+        }
+
+        &:hover {
+          opacity: .6;
+        }
+      }
+    }
+  }
+}
+
+.nav-icon {
+  position: fixed;
+  background: transparent;
+  border: none;
+  top: 2.0rem;
+  right: 2.0rem;
+  width: 60px;
+  height: 60px;
+  padding: 20px 15px;
+  transform: rotate(0deg);
+  transition: .3s ease-in-out;
+  cursor: pointer;
+
+  span {
+    background: variables.$body-grey;
+    display: block;
+    position: absolute;
+    height: 5px;
+    width: 30px;
+    border-radius: 5px;
+    opacity: 1;
+    left: 15px;
+    transform: rotate(0deg);
+    transition: all .25s ease-in-out;
+
+    &:nth-child(1) {
+      top: 18px;
+    }
+
+    &:nth-child(2),
+    &:nth-child(3) {
+      top: 27px;
+    }
+
+    &:nth-child(4) {
+      top: 36px;
+    }
+  }
+
+  .home & {
+    span {
+      background: white !important;
+    }
+  }
+
+  .open & {
+    span {
+      background: white !important;
+
+      &:nth-child(1),
+      &:nth-child(4) {
+        top: 27px;
+        width: 0%;
+        left: 50%;
+      }
+
+      &:nth-child(2) {
+        transform: rotate(45deg);
+      }
+
+      &:nth-child(3) {
+        transform: rotate(-45deg);
+      }
+    }
+  }
+}
+
+//Page Specific Style for Menu
+.book,
+.book-index {
+
+  .menu-pane,
+  .current-section {
+    background: #FFF;
+  }
+}
+
+.charlie-martz-other-stories {
+
+  .menu-pane,
+  .current-section {
+    background: variables.$el-pink;
+
+    span {
+      color: #FFF !important;
+    }
+  }
+
+  .nav-icon span {
+    background: #FFF !important;
+  }
+
+}
