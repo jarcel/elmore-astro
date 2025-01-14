@@ -1,0 +1,99 @@
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  99% {
+    opacity: .01;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes signIt {
+  100% {
+    background-position: -8680px 0;
+  }
+}
+
+@keyframes signItLarge {
+  100% {
+    background-position: -14136px 0;
+  }
+}
+
+@keyframes navAnimation {
+  0% {
+    left: 90%;
+    opacity: 0;
+  }
+
+  75% {
+    left: -20%;
+  }
+
+  100% {
+    left: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes navAnimationRev {
+  0% {
+    left: 0;
+    opacity: 1;
+  }
+
+  100% {
+    left: 90%;
+    opacity: 0;
+  }
+
+}
+
+@keyframes enterAnimation {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes leaveAnimation {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes enterAnimationPush {
+  from {
+    opacity: 0;
+    transform: translateY(60%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes leaveAnimationPush {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(60%);
+  }
+}
