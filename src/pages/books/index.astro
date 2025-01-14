@@ -11,17 +11,21 @@ const books = await fetchBooks("asc")
     {
       books.length > 0 ? (
         books.map(
-          (book: {
-            documentId: string
-            Title: string
-            Year: number
-            Thumbnail?: { url: string }
-          }) => (
+          (
+            book: {
+              documentId: string
+              Title: string
+              Year: number
+              Thumbnail?: { url: string }
+            },
+            index: number
+          ) => (
             <BookTile
               key={book.documentId}
               title={book.Title}
               year={book.Year}
               thumbnailUrl={book.Thumbnail?.url || "/default-thumbnail.jpg"}
+              index={index}
             />
           )
         )

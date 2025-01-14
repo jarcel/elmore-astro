@@ -1,7 +1,9 @@
 /* Global Styles */
 @use './reset';
 @use './fonts';
+@use './animation';
 @use './base';
 
 /* Components */
+@use './navigation';
 @use './components/media-grid';
