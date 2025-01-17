@@ -1,0 +1,53 @@
+---
+export interface ParallaxProps {
+  imageUrl: string // URL of the background image
+  speed?: number // Speed of the parallax effect (default: 0.5)
+  height?: string // Height of the parallax container (default: '100vh')
+}
+
+const { imageUrl, speed = 0.5, height = "100vh" } = Astro.props
+---
+
+<div
+  class="parallax-container"
+  style={`background-image: url('${imageUrl}'); height: ${height};`}
+  data-speed={speed}
+>
+  <slot />
+</div>
+
+<style lang="scss">
+  .parallax-container {
+    position: relative;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: top center;
+    background-repeat: no-repeat;
+    width: 100%;
+    overflow: hidden;
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+  }
+</style>
+
+<script>
+  if (typeof window !== "undefined") {
+    window.addEventListener("scroll", () => {
+      const parallaxContainers = document.querySelectorAll(
+        ".parallax-container"
+      )
+
+      parallaxContainers.forEach((element) => {
+        // Type assertion to access `dataset`
+        const container = element as HTMLElement
+
+        // Read speed from the dataset
+        const speed = parseFloat(container.dataset.speed || "0.5")
+        const offset = window.scrollY * speed
+
+        // Update background position
+        container.style.transform = `translate3d(0, ${offset}px, 0)`
+      })
+    })
+  }
+</script>
