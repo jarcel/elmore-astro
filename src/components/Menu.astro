@@ -1,5 +1,5 @@
 ---
-const { currentSection = "", primaryColor = "#FFF", lastVal = 0 } = Astro.props
+const { sectionTitle = "", sectionColor = "#000", lastVal = 0 } = Astro.props
 
 // Navigation links
 const navLinks = [
@@ -17,9 +17,9 @@ const navLinks = [
 
   <!-- Current Section -->
   {
-    currentSection && (
-      <a href={`/${currentSection.toLowerCase()}`} class="current-section">
-        <span style={`color: ${primaryColor}`}>{currentSection}</span>
+    sectionTitle && (
+      <a href={`/${sectionTitle.toLowerCase()}`} class="current-section">
+        <span style={`color: ${sectionColor}`}>{sectionTitle}</span>
       </a>
     )
   }
@@ -45,10 +45,10 @@ const navLinks = [
       aria-expanded="false"
       aria-label="Open navigation menu"
     >
-      <span style={`background: ${primaryColor}`}></span>
-      <span style={`background: ${primaryColor}`}></span>
-      <span style={`background: ${primaryColor}`}></span>
-      <span style={`background: ${primaryColor}`}></span>
+      <span style={`background: ${sectionColor}`}></span>
+      <span style={`background: ${sectionColor}`}></span>
+      <span style={`background: ${sectionColor}`}></span>
+      <span style={`background: ${sectionColor}`}></span>
     </button>
   </nav>
 </header>

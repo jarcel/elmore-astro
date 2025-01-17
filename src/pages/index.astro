@@ -1,12 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro"
+import ParallaxBillboard from "../components/ParallaxBillboard.astro"
 import FooterLink from "../components/FooterLink.astro"
 ---
 
-<Layout>
-  <div class="home-billboard">
-    <div class="inner"></div>
-  </div>
+<Layout classNames={["home"]} pageTitle="Elmore Leonard | Official Website">
+  <ParallaxBillboard imageUrl="/images/bg-home-clear.jpg" />
   <footer>
     <FooterLink href="/dutch" label="Dutch" />
     <FooterLink href="/books" label="Books" />
@@ -15,11 +14,11 @@ import FooterLink from "../components/FooterLink.astro"
   </footer>
 </Layout>
 
-<style lang="scss">
+<style lang="scss" scoped>
   @use "../styles/variables.scss" as vars;
   .home-billboard {
+    position: relative;
     background: vars.$el-pink;
-    height: 100vh;
     width: 100vw;
     overflow: hidden;
     .inner {

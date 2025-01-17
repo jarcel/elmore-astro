@@ -1,6 +1,20 @@
 ---
 import "../styles/global.scss"
 import Menu from "../components/Menu.astro"
+
+export interface LayoutProps {
+  pageTitle?: string
+  sectionTitle?: string
+  sectionColor?: string
+  classNames?: string[]
+}
+
+const {
+  pageTitle,
+  sectionTitle = "",
+  sectionColor,
+  classNames = [],
+} = Astro.props
 ---
 
 <!doctype html>
@@ -10,10 +24,10 @@ import Menu from "../components/Menu.astro"
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>Astro Basics</title>
+    <title>Elmore Leonard | Official Website</title>
   </head>
-  <body>
-    <Menu />
+  <body class:list={[...classNames]}>
+    <Menu sectionTitle={sectionTitle} sectionColor={sectionColor} />
     <slot />
   </body>
 </html>
