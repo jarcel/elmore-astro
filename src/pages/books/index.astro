@@ -6,7 +6,11 @@ import { fetchBooks } from "../../utils/fetchBooks"
 const books = await fetchBooks("asc")
 ---
 
-<Layout title="Books">
+<Layout
+  sectionTitle="Books"
+  classNames={["book-index"]}
+  pageTitle="Books | Elmore Leonard"
+>
   <section class="media-grid book-list">
     {
       books.length > 0 ? (
@@ -17,6 +21,8 @@ const books = await fetchBooks("asc")
               Title: string
               Year: number
               Thumbnail?: { url: string }
+              PrimaryColor?: string
+              slug: string
             },
             index: number
           ) => (
@@ -25,7 +31,9 @@ const books = await fetchBooks("asc")
               title={book.Title}
               year={book.Year}
               thumbnailUrl={book.Thumbnail?.url || "/default-thumbnail.jpg"}
+              slug={book.slug}
               index={index}
+              primaryColor={book.PrimaryColor}
             />
           )
         )

@@ -9,6 +9,8 @@ const BOOKS_QUERY = gql`
       Thumbnail {
         url
       }
+      slug
+      PrimaryColor
     }
   }
 `
