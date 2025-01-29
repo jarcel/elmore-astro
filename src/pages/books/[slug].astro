@@ -1,0 +1,36 @@
+---
+import Layout from "../../layouts/Layout.astro"
+import { fetchBook } from "../../utils/fetchBook"
+import { fetchBooks } from "../../utils/fetchBooks"
+
+const { slug } = Astro.params
+const book = await fetchBook(slug)
+
+if (!book) {
+  throw new Error("Book not found")
+}
+
+// Generate static paths at build time
+export async function getStaticPaths() {
+  const books = await fetchBooks()
+
+  return books.map((book: { slug: string }) => ({
+    params: { slug: book.slug },
+  }))
+}
+---
+
+<Layout
+  sectionTitle="Books"
+  classNames={["book"]}
+  pageTitle=`${book.Title} | Elmore Leonard`
+  sectionColor=`${book.PrimaryColor}`
+>
+  <div class="billboard">
+    <picture>
+      <source srcset={book.BillboardImage?.url} media="(min-width: 768px)" />
+      <img src={book.BillboardImageMobile?.url} alt={book.title} />
+    </picture>
+    <h1>{book.Title}</h1>
+  </div>
+</Layout>
