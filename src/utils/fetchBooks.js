@@ -2,8 +2,8 @@ import { gql } from "graphql-request"
 import { fetchGraphQL } from "./fetchGraphQL"
 
 const BOOKS_QUERY = gql`
-  query Query($sort: [String]) {
-    books(sort: $sort) {
+  query Query($sort: [String], $pagination: PaginationArg) {
+    books(sort: $sort, pagination: $pagination) {
       Title
       Year
       Thumbnail {
@@ -21,7 +21,10 @@ export async function fetchBooks(order = "asc") {
     const sortOrder = order === "asc" ? "Year:asc" : "Year:desc"
 
     // Pass the sorting parameter
-    const variables = { sort: [sortOrder] }
+    const variables = {
+      sort: [sortOrder],
+      pagination: { limit: 100 },
+    }
 
     // Fetch data from the GraphQL API
     const data = await fetchGraphQL(BOOKS_QUERY, variables)
