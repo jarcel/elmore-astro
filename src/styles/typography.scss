@@ -16,8 +16,8 @@ h1 {
   color: white;
   margin: 0;
   width: 100%;
-  padding: 0px 40px;
-
+  padding: 0px 4rem;
+  text-wrap: balance;
   @media (min-width: variables.$screen-sm) {
     font-size: 7rem;
     line-height: 6rem;
@@ -26,6 +26,8 @@ h1 {
   @media (min-width: variables.$screen-md) {
     font-size: 10rem;
     line-height: 9rem;
+    max-width: 80rem;
+    margin: 0 auto;
   }
 }
 

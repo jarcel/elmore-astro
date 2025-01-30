@@ -2,16 +2,164 @@
 .section-wrapper{
   padding: 4rem 0rem;
   overflow: hidden;
+  color: variables.$body-grey;
+  line-height: 3.6rem;
   @media screen and (min-width: variables.$screen-sm) {
     padding: 10rem 0rem;
   }
   &.black{
     background-color: black;
+    color: #FFF;
   }
   &.white{
     background-color: white;
   }
   &.pink {
     background-color: variables.$el-pink;
+  }
+}
+
+.content-wrapper{
+  margin: 0 auto;
+  @media screen and (min-width: variables.$screen-md) {
+    max-width: variables.$screen-md;
+  }
+}
+
+.columned{
+  padding: 0 3rem;
+  @media screen and (min-width: variables.$screen-md) {
+    &.right{
+      p{
+        padding-left: 50%;
+      }
+    }
+    &.left{
+      p {
+          padding-right: 50%;
+        }
+    }
+  }
+}
+
+
+
+.dutch-bio{
+  background: #000 url(/images/bg-dutch.gif) top right no-repeat;
+  position: relative;
+  background-size: contain;
+  width: 100%;   
+  @media screen and (min-width: variables.$screen-sm) {
+    padding: 4rem 3rem;
+  }
+  @media screen and (min-width: variables.$screen-md) {
+    padding: 4rem 8rem 15rem;
+    background-size: auto;
+  }
+  h1 {
+    padding: 0;
+    color: variables.$el-pink;
+    margin: 20rem 0 10rem;
+    @media screen and (min-width: variables.$screen-sm) {
+      margin: 20rem auto;
+    }
+  }
+  p {
+    color: #FFF;
+    line-height: 3rem;
+    font-size: 1.6rem;
+    margin-bottom: 4rem;
+
+    @media screen and (min-width: variables.$screen-sm) {
+      line-height: 3.6rem;
+      font-size: 1.8rem;
+      margin-bottom: 4rem;
+    }
+  }
+}
+
+.writing-rules {
+  padding: 0 3rem;
+  max-width: 70rem;
+  margin: 0 auto;
+
+  .small-heading {
+    background: variables.$el-pink;
+  }
+
+  background: #FFF;
+
+  ol {
+    padding: 0;
+    margin: 0;
+    color: variables.$el-pink;
+    list-style-position: inside;
+  }
+
+  li {
+    font-weight: normal;
+    color: variables.$el-pink;
+    padding: 2.2rem 0;
+    font-size: 2rem;
+    line-height: 3rem;
+
+    span {
+      color: variables.$text-grey;
+      font-weight: 300;
+      text-wrap: balance;
+    }
+
+    &:last-of-type {
+      list-style: none;
+    }
+
+    @media screen and (min-width: variables.$screen-sm) {
+      font-size: 3.6rem;
+      line-height: 5.0rem;
+      padding: 3rem 0;
+    }
+
+    @media screen and (min-width: variables.$screen-md) {
+      font-size: 3.6rem;
+      line-height: 5.0rem;
+      padding: 4rem 0;
+    }
+  }
+}
+
+.awards {
+  text-align: left;
+  transform: none;
+  margin:0 auto;
+  max-width:700px;
+  padding:0px 30px;
+  color: #FFF;
+  .small-heading {
+    background: white;
+    color: variables.$el-pink;
+    margin-bottom: 3rem;
+  }
+
+  h2 {
+    margin: 0;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      list-style: none;
+      font-weight: 300;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      line-height: 3rem;
+
+      @media screen and (min-width: variables.$screen-sm) {
+        font-size: 3rem;
+        line-height: 4rem;
+      }
+    }
   }
 }
