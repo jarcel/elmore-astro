@@ -1,0 +1,17 @@
+@use './variables';
+.section-wrapper{
+  padding: 4rem 0rem;
+  overflow: hidden;
+  @media screen and (min-width: variables.$screen-sm) {
+    padding: 10rem 0rem;
+  }
+  &.black{
+    background-color: black;
+  }
+  &.white{
+    background-color: white;
+  }
+  &.pink {
+    background-color: variables.$el-pink;
+  }
+}

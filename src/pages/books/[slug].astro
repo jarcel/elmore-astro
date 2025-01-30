@@ -22,7 +22,7 @@ export async function getStaticPaths() {
 
 <Layout
   sectionTitle="Books"
-  classNames={["book"]}
+  classNames={["book", book.slug]}
   pageTitle=`${book.Title} | Elmore Leonard`
   sectionColor=`${book.PrimaryColor}`
 >
@@ -33,4 +33,17 @@ export async function getStaticPaths() {
     </picture>
     <h1>{book.Title}</h1>
   </div>
+
+  <section class="content">
+    <h2 style=`color: ${book.PrimaryColor}`>The Run Down.</h2>
+    <p class="synopsis" set:html={book.Synopsis} />
+    <span>
+      <strong style=`color: ${book.PrimaryColor}`>Published:</strong>
+      {book.Year}
+    </span>
+    <span>
+      <strong style=`color: ${book.PrimaryColor}`>Publisher:</strong>
+      {book.Publisher}
+    </span>
+  </section>
 </Layout>

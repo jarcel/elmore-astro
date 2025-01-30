@@ -1,3 +1,5 @@
+@use './variables';
+
 h1,
 h2,
 h3,
@@ -16,12 +18,12 @@ h1 {
   width: 100%;
   padding: 0px 40px;
 
-  @media (min-width: $screen-sm) {
+  @media (min-width: variables.$screen-sm) {
     font-size: 7rem;
     line-height: 6rem;
   }
 
-  @media (min-width: $screen-md) {
+  @media (min-width: variables.$screen-md) {
     font-size: 10rem;
     line-height: 9rem;
   }
@@ -30,7 +32,7 @@ h1 {
 h2 {
   font-size: 3rem;
 
-  @media (min-width: $screen-sm) {
+  @media (min-width: variables.$screen-sm) {
     font-size: 3.6rem;
   }
 }
@@ -53,10 +55,10 @@ h2 {
 
 .gallery-title {
   text-align: center;
-  color: $text-grey;
+  color: variables.$text-grey;
   margin: 0 0 6rem;
 
-  @media (min-width: $screen-sm) {
+  @media (min-width: variables.$screen-sm) {
     margin: 0 0 8rem;
   }
 }
