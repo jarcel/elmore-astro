@@ -3,12 +3,19 @@ export interface FooterLinkProps {
   href: string
   label: string
   className?: string
+  imgSrc?: string
+  bgColor?: string
 }
 
-const { href, label, className = "" } = Astro.props
+const { href, label, className = "", imgSrc, bgColor } = Astro.props
 ---
 
-<div class={`footer-link ${className}`}>
+<div class={`footer-link ${className}`} style={`background-color: ${bgColor}`}>
+  {
+    imgSrc && (
+      <div class="nl-image" style={`background-image: url('${imgSrc}')`} />
+    )
+  }
   <a href={href}>
     <span>{label}</span>
   </a>
@@ -64,6 +71,30 @@ const { href, label, className = "" } = Astro.props
         @media (min-width: vars.$screen-md) {
           font-size: 10rem;
           line-height: 9rem;
+        }
+      }
+    }
+
+    &.next-link {
+      background: vars.$body-grey;
+      overflow: hidden;
+      .nl-image {
+        opacity: 0.7;
+        transition: transform 4s vars.$nice-bezier;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        transform: translateZ(0);
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        backface-visibility: hidden;
+      }
+      @media screen and (min-width: vars.$screen-md) {
+        &:hover {
+          .nl-image {
+            transform: scale(1.1);
+          }
         }
       }
     }

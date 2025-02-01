@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro"
+import FooterLink from "../../components/FooterLink.astro"
 import { fetchBook } from "../../utils/fetchBook"
 import { fetchBooks } from "../../utils/fetchBooks"
 
@@ -46,4 +47,27 @@ export async function getStaticPaths() {
       {book.Publisher}
     </span>
   </section>
+  <footer>
+    {
+      book.NextBooks?.books.map(
+        (
+          nextBook: {
+            Title: string
+            FooterImage: { url: string }
+            slug: string
+            PrimaryColor: string
+          },
+          index: number
+        ) => (
+          <FooterLink
+            className="next-link"
+            href={`/books/${nextBook.slug}`}
+            label={nextBook.Title}
+            imgSrc={nextBook.FooterImage.url}
+            bgColor={nextBook.PrimaryColor}
+          />
+        )
+      )
+    }
+  </footer>
 </Layout>

@@ -28,6 +28,30 @@ const BOOK_QUERY = gql`
       BillboardImageMobile {
         url
       }
+      Slides {
+        __typename
+        ... on ComponentSlidesTagline {
+          Content
+        }
+        ... on ComponentSlidesReview {
+          Content
+          PublicationImage {
+            url
+          }
+          Credit
+          StarRating
+        }
+      }
+      NextBooks {
+        books {
+          Title
+          slug
+          PrimaryColor
+          FooterImage {
+            url
+          }
+        }
+      }
     }
   }
 `
@@ -40,7 +64,6 @@ export async function fetchBook(slug) {
     if (!data?.books) return null
 
     const book = data.books[0]
-
     return book
   } catch (error) {
     console.error("Error fetching book:", error.message)
