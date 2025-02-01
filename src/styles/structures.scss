@@ -26,6 +26,10 @@
   }
 }
 
+.sticky-container{
+  position: relative;
+}
+
 .columned{
   padding: 0 3rem;
   @media screen and (min-width: variables.$screen-md) {
