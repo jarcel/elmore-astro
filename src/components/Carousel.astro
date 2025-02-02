@@ -1,0 +1,81 @@
+---
+import SlideTagline from "./SlideTagline.astro"
+import SlideReview from "./SlideReview.astro"
+import SlideCharacter from "./SlideCharacter.astro"
+
+const { slides = [], primaryColor } = Astro.props
+---
+
+<section class="swiper">
+  <div class="swiper-wrapper">
+    {
+      slides.map((slide: any) => (
+        <div class="swiper-slide">
+          {(() => {
+            switch (slide.__typename) {
+              case "ComponentSlidesTagline":
+                return (
+                  <SlideTagline
+                    content={slide.Content}
+                    bgColor={primaryColor}
+                  />
+                )
+              case "ComponentSlidesReview":
+                return (
+                  <SlideReview
+                    content={slide.Content}
+                    publicationImage={slide.PublicationImage?.url}
+                    credit={slide.Credit}
+                    bgColor={primaryColor}
+                  />
+                )
+              case "ComponentSlidesCharacter":
+                return (
+                  <SlideCharacter
+                    content={slide.Content}
+                    characterImage={slide.CharacterImage?.url}
+                    name={slide.Name}
+                    bgColor={primaryColor}
+                  />
+                )
+              default:
+                return null
+            }
+          })()}
+        </div>
+      ))
+    }
+  </div>
+  <!-- Pagination Dots -->
+  <div class="swiper-pagination"></div>
+</section>
+
+<script>
+  import "swiper/css"
+  import "swiper/css/pagination"
+  import Swiper from "swiper"
+  import { register } from "swiper/element/bundle"
+  register()
+
+  const swiper = new Swiper(".swiper", {
+    slidesPerView: 1,
+    loop: true,
+    autoplay: false,
+    grabCursor: true,
+    mousewheel: false,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+  })
+</script>
+
+<style lang="scss">
+  .swiper {
+    --swiper-pagination-bullet-size: 1.4rem;
+    --swiper-pagination-color: white;
+    --swiper-pagination-bullet-inactive-color: white;
+    --swiper-pagination-bullet-inactive-opacity: 0.5;
+    --swiper-pagination-bottom: 5rem;
+  }
+</style>
