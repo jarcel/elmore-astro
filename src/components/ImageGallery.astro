@@ -1,0 +1,67 @@
+---
+// Image type definition
+export interface Image {
+  url: string
+}
+
+const { images = [], title } = Astro.props
+---
+
+<section class="image-gallery">
+  <h2>{title}</h2>
+  <div class="image-row">
+    {
+      images.map((image: Image) => (
+        <img
+          src={image.url}
+          alt="Gallery Image"
+          class="gallery-image"
+          loading="lazy"
+        />
+      ))
+    }
+  </div>
+</section>
+
+<style lang="scss">
+  @use "../styles/variables.scss" as variables;
+  .image-gallery {
+    width: 100%;
+    overflow: hidden;
+    h2 {
+      text-align: center;
+      color: variables.$text-grey;
+      margin: 0 0 3rem;
+      @media screen and (min-width: variables.$screen-sm) {
+        margin: 0 0 5rem;
+      }
+    }
+  }
+
+  .image-row {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 2rem;
+    padding: 1rem 3rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .gallery-image {
+    height: 30rem;
+    width: auto;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    @media screen and (min-width: variables.$screen-sm) {
+      height: 40rem;
+    }
+    @media screen and (min-width: variables.$screen-md) {
+      height: 50rem;
+    }
+  }
+
+  .image-row::-webkit-scrollbar {
+    display: none;
+  }
+</style>
