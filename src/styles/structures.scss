@@ -26,10 +26,6 @@
   }
 }
 
-.sticky-container{
-  position: relative;
-}
-
 .columned{
   padding: 0 3rem;
   @media screen and (min-width: variables.$screen-md) {
@@ -86,12 +82,11 @@
   padding: 0 3rem;
   max-width: 70rem;
   margin: 0 auto;
+  background: #FFF;
 
   .small-heading {
     background: variables.$el-pink;
   }
-
-  background: #FFF;
 
   ol {
     padding: 0;
@@ -138,6 +133,7 @@
   max-width:700px;
   padding:0px 30px;
   color: #FFF;
+
   .small-heading {
     background: white;
     color: variables.$el-pink;

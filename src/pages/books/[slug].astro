@@ -1,6 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro"
+import InfoWrapper from "../../components/InfoWrapper.astro"
 import FooterLink from "../../components/FooterLink.astro"
+import SlideTagline from "../../components/SlideTagline.astro"
 import { fetchBook } from "../../utils/fetchBook"
 import { fetchBooks } from "../../utils/fetchBooks"
 
@@ -34,19 +36,61 @@ export async function getStaticPaths() {
     </picture>
     <h1>{book.Title}</h1>
   </div>
-
-  <section class="content">
-    <h2 style=`color: ${book.PrimaryColor}`>The Run Down.</h2>
-    <p class="synopsis" set:html={book.Synopsis} />
-    <span>
-      <strong style=`color: ${book.PrimaryColor}`>Published:</strong>
-      {book.Year}
-    </span>
-    <span>
-      <strong style=`color: ${book.PrimaryColor}`>Publisher:</strong>
-      {book.Publisher}
-    </span>
+  <!-- Book Content -->
+  <section class="section-wrapper white">
+    <InfoWrapper title="The Run Down." primaryColor={book.PrimaryColor}>
+      <div slot="main">
+        <p class="synopsis" set:html={book.Synopsis} />
+      </div>
+      <div slot="side">
+        <p>
+          <span>
+            <strong style=`color: ${book.PrimaryColor}`>Published:</strong>
+            {book.Year}
+          </span>
+        </p>
+        <p>
+          <span>
+            <strong style=`color: ${book.PrimaryColor}`>Publisher:</strong>
+            {book.Publisher}
+          </span>
+        </p>
+        { book.Genres.length > 0 && (
+          <p>
+            <span>
+              <strong style=`color: ${book.PrimaryColor}`>{book.Genres.length > 1 ? "Genres:" : "Genre:"}</strong>
+              {book.Genres.map((genre) => genre.Name).join(", ")}
+            </span>
+          </p>
+        )}
+        { book.Locations.length > 0 && (
+          <p>
+            <span>
+              <strong style=`color: ${book.PrimaryColor}`>{book.Locations.length > 1 ? "Locations:" : "Location:"}</strong>
+              {book.Locations.map((location) => location.Name).join(", ")}
+            </span>
+          </p>
+        )}
+      </div>
+    </InfoWrapper>
   </section>
+  <!-- /Book Content -->
+  <!-- Book Slides -->
+  {
+    book.Slides?.map((slide) => {
+      switch (slide.__typename) {
+        case "ComponentSlidesTagline":
+          return (
+            <SlideTagline content={slide.Content} bgColor={book.PrimaryColor} />
+          )
+
+        default:
+          return null // Handle unknown slide types
+      }
+    })
+  }
+  <!-- /Book Slides -->
+  <!-- Footer Links -->
   <footer>
     {
       book.NextBooks?.books.map(
