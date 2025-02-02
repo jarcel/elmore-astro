@@ -1,0 +1,64 @@
+---
+const { title, primaryColor } = Astro.props
+---
+
+<div class="grid-wrapper">
+  <h2 class="grid-heading" style=`color: ${primaryColor}`>{title}</h2>
+  <div class="main-column">
+    <slot name="main" />
+  </div>
+  <div class="side-column">
+    <slot name="side" />
+  </div>
+</div>
+
+<style lang="scss">
+  @use "../styles/variables.scss" as variables;
+  .grid-wrapper {
+    display: grid;
+    grid-template-columns: 44.5rem auto;
+    gap: 2rem 12.5rem;
+    max-width: 815px;
+    margin: 0 auto;
+  }
+
+  .grid-heading {
+    grid-column: span 2;
+    text-align: left;
+    margin-bottom: 1rem;
+  }
+
+  .main-column {
+    width: 100%;
+  }
+
+  .side-column {
+    width: 100%;
+    strong {
+      color: variables.$el-pink;
+    }
+    ul,
+    li {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    li {
+      span {
+        display: inline-block;
+      }
+    }
+  }
+
+  @media (max-width: variables.$screen-md) {
+    .grid-wrapper {
+      grid-template-columns: 1fr;
+      gap: 20px;
+      padding: 0 3rem;
+    }
+
+    .grid-heading {
+      grid-column: span 1;
+    }
+  }
+</style>
