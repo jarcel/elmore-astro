@@ -1,0 +1,43 @@
+---
+export interface ReviewProps {
+  content: string
+  characterImage?: string
+  bgColor?: string
+  name: string
+}
+
+const { bgColor, content, name, characterImage } = Astro.props
+---
+
+<div
+  class="slide character"
+  style=`background: url(${characterImage}) no-repeat center center / cover; background-color: ${bgColor}`
+>
+  <div class="inner">
+    <h2>{name}</h2>
+    <p>{content}</p>
+  </div>
+</div>
+
+<style lang="scss">
+  @use "../styles/variables.scss" as variables;
+  .slide.character {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60rem;
+    .inner {
+      padding: 0px 3rem;
+      text-align: left;
+      @media screen and (min-width: variables.$screen-md) {
+        width: 700px;
+      }
+    }
+    p {
+      margin: 1em 0;
+      font-size: 1.6rem;
+      line-height: 3.5rem;
+    }
+  }
+</style>
