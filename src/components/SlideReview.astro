@@ -1,0 +1,74 @@
+---
+export interface ReviewProps {
+  content: string
+  publicationImage?: string
+  bgColor?: string
+  credit: string
+}
+
+const { bgColor, content, credit, publicationImage } = Astro.props
+---
+
+<div class="slide review" style=`background: ${bgColor}`>
+  <div class="inner">
+    {
+      publicationImage && (
+        <img src={publicationImage} alt={credit} class="publication-image" />
+      )
+    }
+    <p>{content}</p>
+    <span class="credit">&mdash; {credit}</span>
+  </div>
+</div>
+
+<style lang="scss">
+  @use "../styles/variables.scss" as variables;
+  .slide.review {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60rem;
+    .inner {
+      padding: 0px 3rem;
+      text-align: center;
+      @media screen and (min-width: variables.$screen-md) {
+        width: 700px;
+      }
+    }
+    .publication-image {
+      margin: 0 auto;
+      max-width: 25rem;
+    }
+    p {
+      margin: 1em 0;
+      font-weight: 300;
+      font-size: 2rem;
+      line-height: 2.5rem;
+      &:before {
+        content: "\201c";
+      }
+      &:after {
+        content: "\201d";
+      }
+    }
+    .credit {
+      font-weight: 900;
+      font-size: 1.4rem;
+      text-transform: uppercase;
+    }
+    @media screen and (min-width: variables.$screen-sm) {
+      p {
+        font-size: 2.5rem;
+        line-height: 3.5rem;
+      }
+      .credit {
+        font-size: 1.6rem;
+      }
+      .publication-image {
+        max-height: 10rem;
+        max-width: 40rem;
+      }
+    }
+  }
+</style>
