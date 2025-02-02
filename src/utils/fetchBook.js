@@ -39,7 +39,13 @@ const BOOK_QUERY = gql`
             url
           }
           Credit
-          StarRating
+        }
+        ... on ComponentSlidesCharacter {
+          Name
+          Content
+          CharacterImage {
+            url
+          }
         }
       }
       NextBooks {
