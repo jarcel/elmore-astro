@@ -3,9 +3,10 @@ import Layout from "../../layouts/Layout.astro"
 import InfoWrapper from "../../components/InfoWrapper.astro"
 import FooterLink from "../../components/FooterLink.astro"
 import SlideTagline from "../../components/SlideTagline.astro"
-import SlideBookReview from "../../components/SlideBookReview.astro"
+import SlideReview from "../../components/SlideReview.astro"
 import { fetchBook } from "../../utils/fetchBook"
 import { fetchBooks } from "../../utils/fetchBooks"
+import ImageGallery from "../../components/ImageGallery.astro"
 
 const { slug } = Astro.params
 const book = await fetchBook(slug)
@@ -86,7 +87,7 @@ export async function getStaticPaths() {
           )
         case "ComponentSlidesReview":
           return (
-            <SlideBookReview
+            <SlideReview
               content={slide.Content}
               publicationImage={slide.PublicationImage?.url}
               credit={slide.Credit}
@@ -100,6 +101,11 @@ export async function getStaticPaths() {
     })
   }
   <!-- /Book Slides -->
+  <!-- Covers -->
+  <section class="section-wrapper white">
+    <ImageGallery images={book.BookCovers} title="Alternate Covers" />
+  </section>
+  <!-- /Covers -->
   <!-- Footer Links -->
   <footer>
     {
