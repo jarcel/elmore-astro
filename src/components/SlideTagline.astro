@@ -1,0 +1,47 @@
+---
+export interface FooterLinkProps {
+  content: string
+  bgColor?: string
+}
+
+const { bgColor, content } = Astro.props
+---
+
+<div class="slide tagline" style=`background: ${bgColor}`>
+  <div class="inner">
+    <p>{content}</p>
+  </div>
+</div>
+
+<style lang="scss">
+  @use "../styles/variables.scss" as variables;
+  .slide.tagline {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60rem;
+    .inner {
+      padding: 0px 3rem;
+      text-align: center;
+      @media screen and (min-width: variables.$screen-md) {
+        width: 700px;
+      }
+    }
+    p {
+      color: white;
+      font-weight: 300;
+      margin-top: 0;
+      font-size: 2.5rem;
+      line-height: 3.5rem;
+      text-wrap: balance;
+      @media screen and (min-width: variables.$screen-sm) {
+        font-size: 3.5rem;
+        line-height: 4.5rem;
+      }
+      @media screen and (min-width: variables.$screen-md) {
+        font-size: 4rem;
+        line-height: 5rem;
+      }
+    }
+  }
+</style>
