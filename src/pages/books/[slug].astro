@@ -3,6 +3,7 @@ import Layout from "../../layouts/Layout.astro"
 import InfoWrapper from "../../components/InfoWrapper.astro"
 import FooterLink from "../../components/FooterLink.astro"
 import SlideTagline from "../../components/SlideTagline.astro"
+import SlideBookReview from "../../components/SlideBookReview.astro"
 import { fetchBook } from "../../utils/fetchBook"
 import { fetchBooks } from "../../utils/fetchBooks"
 
@@ -82,6 +83,15 @@ export async function getStaticPaths() {
         case "ComponentSlidesTagline":
           return (
             <SlideTagline content={slide.Content} bgColor={book.PrimaryColor} />
+          )
+        case "ComponentSlidesReview":
+          return (
+            <SlideBookReview
+              content={slide.Content}
+              publicationImage={slide.PublicationImage?.url}
+              credit={slide.Credit}
+              bgColor={book.PrimaryColor}
+            />
           )
 
         default:
