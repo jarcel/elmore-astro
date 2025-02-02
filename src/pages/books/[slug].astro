@@ -2,8 +2,7 @@
 import Layout from "../../layouts/Layout.astro"
 import InfoWrapper from "../../components/InfoWrapper.astro"
 import FooterLink from "../../components/FooterLink.astro"
-import SlideTagline from "../../components/SlideTagline.astro"
-import SlideReview from "../../components/SlideReview.astro"
+import Carousel from "../../components/Carousel.astro"
 import { fetchBook } from "../../utils/fetchBook"
 import { fetchBooks } from "../../utils/fetchBooks"
 import ImageGallery from "../../components/ImageGallery.astro"
@@ -61,7 +60,7 @@ export async function getStaticPaths() {
           <p>
             <span>
               <strong style=`color: ${book.PrimaryColor}`>{book.Genres.length > 1 ? "Genres:" : "Genre:"}</strong>
-              {book.Genres.map((genre) => genre.Name).join(", ")}
+              {book.Genres.map((genre: any) => genre.Name).join(", ")}
             </span>
           </p>
         )}
@@ -69,7 +68,15 @@ export async function getStaticPaths() {
           <p>
             <span>
               <strong style=`color: ${book.PrimaryColor}`>{book.Locations.length > 1 ? "Locations:" : "Location:"}</strong>
-              {book.Locations.map((location) => location.Name).join(", ")}
+              {book.Locations.map((location: any) => location.Name).join(", ")}
+            </span>
+          </p>
+        )}
+        { book.Characters.length > 0 && (
+          <p>
+            <span>
+              <strong style=`color: ${book.PrimaryColor}`>{book.Characters.length > 1 ? "Characters:" : "Character:"}</strong>
+              {book.Characters.map((character: any) => character.Name).join(", ")}
             </span>
           </p>
         )}
@@ -78,27 +85,8 @@ export async function getStaticPaths() {
   </section>
   <!-- /Book Content -->
   <!-- Book Slides -->
-  {
-    book.Slides?.map((slide) => {
-      switch (slide.__typename) {
-        case "ComponentSlidesTagline":
-          return (
-            <SlideTagline content={slide.Content} bgColor={book.PrimaryColor} />
-          )
-        case "ComponentSlidesReview":
-          return (
-            <SlideReview
-              content={slide.Content}
-              publicationImage={slide.PublicationImage?.url}
-              credit={slide.Credit}
-              bgColor={book.PrimaryColor}
-            />
-          )
-
-        default:
-          return null // Handle unknown slide types
-      }
-    })
+  { book.Slides &&
+    <Carousel slides={book.Slides} primaryColor={book.PrimaryColor} />
   }
   <!-- /Book Slides -->
   <!-- Covers -->
