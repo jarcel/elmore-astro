@@ -3,10 +3,11 @@
 @use './fonts';
 @use './animation';
 @use './base';
-@use './typography.scss';
+@use './typography';
 @use './structures';
 
 /* Components */
 @use './navigation';
+@use './components/signature';
 @use './components/media-grid';
 @use './components/billboard';

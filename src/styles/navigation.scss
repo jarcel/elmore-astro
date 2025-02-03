@@ -1,42 +1,4 @@
 @use './variables';
-
-.signature {
-  display: inline-block;
-  margin: 2.0rem;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 132px;
-  height: 70px;
-  z-index: 3;
-  background: url('/images/el-sig-dutch.svg') top left no-repeat;
-  background-size: cover;
-  transition: left .3s variables.$nice-bezier;
-
-  @media (min-width: variables.$screen-sm) {
-    width: 226px;
-    height: 120px;
-  }
-
-  .news & {
-    @media (min-width: variables.$screen-md) {
-      position: fixed;
-    }
-  }
-
-  .book:not(.charlie-martz-other-stories) &,
-  .film & .book-index &,
-  .film-index & {
-    background: url('/images/el-sig.svg') top left no-repeat;
-    background-size: cover;
-  }
-
-  .book-index &,
-  .film-index & {
-    left: -300px;
-  }
-}
-
 .current-section {
   display: none;
   position: fixed;
@@ -185,9 +147,11 @@
           &#nl-films {
             animation: ease-out navAnimation .25s forwards .5s;
           }
-
-          &#nl-news {
+          &#nl-podcast {
             animation: ease-out navAnimation .25s forwards .6s;
+          }
+          &#nl-news {
+            animation: ease-out navAnimation .25s forwards .7s;
           }
 
           &#home-link {
