@@ -1,0 +1,51 @@
+---
+const quotes = [
+  "Focus on what's important, <br/><strong>ignore</strong> everything else.",
+  "If it sounds like writing, <br/>I <strong>rewrite</strong> it.",
+  "I spent most of my dough on booze, broads, and boats, <br/>and the rest I <strong>wasted.</strong>",
+]
+
+// Select a random quote on component load
+const randomQuote = quotes[Math.floor(Math.random() * quotes.length)]
+---
+
+<div class="quote-container">
+  <p class="quote" set:html={randomQuote} />
+</div>
+
+<style lang="scss">
+  @use "../styles/variables.scss" as variables;
+  .quote-container {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 6;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    background: url(/images/bg-home-blur.jpg) top center no-repeat;
+    background-size: cover;
+    animation: fadeOut 2s forwards 5s;
+    p {
+      width: 100%;
+      color: #fff;
+      text-align: center;
+      font-weight: 300;
+      font-size: 2.5rem;
+      line-height: 3rem;
+      padding: 0px 3rem;
+      @media screen and (min-width: variables.$screen-sm) {
+        padding: 0;
+        width: 70%;
+        max-width: 70%;
+        font-size: 3.6rem;
+        line-height: 5rem;
+      }
+      @media screen and (min-width: variables.$screen-md) {
+        width: 50%;
+        max-width: 50%;
+      }
+    }
+  }
+</style>
