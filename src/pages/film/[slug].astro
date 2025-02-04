@@ -10,12 +10,9 @@ import {
   replaceUnderscoresWithSpaces,
   wrapNamesInSpan,
 } from "../../utils/formatText"
-import type { StringOptionsWithoutImporter } from "sass"
 
 const { slug, primaryColor = "#292929" } = Astro.params
 const {film, nextAdaptations} = await fetchFilm(slug)
-
-console.log(nextAdaptations)
 
 if (!film) {
   throw new Error("film not found")
@@ -169,7 +166,7 @@ export async function getStaticPaths() {
         ) => (
           <FooterLink
             className="next-link"
-            href={`/films/${nextfilm.slug}`}
+            href={`/film/${nextfilm.slug}`}
             label={nextfilm.Title}
             imgSrc={nextfilm.FooterImage.url}
           />
