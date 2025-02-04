@@ -1,22 +1,21 @@
 import { gql } from "graphql-request"
 import { fetchGraphQL } from "./fetchGraphQL"
 
-const BOOKS_QUERY = gql`
+const ADAPTATION_QUERY = gql`
   query Query($sort: [String], $pagination: PaginationArg) {
-    books(sort: $sort, pagination: $pagination) {
+    adaptations(sort: $sort, pagination: $pagination) {
       Title
       Year
       Thumbnail {
         url
       }
       slug
-      PrimaryColor
       createdAt
     }
   }
 `
 
-export async function fetchBooks(order = "asc") {
+export async function fetchFilms(order = "asc") {
   try {
     // Determine the sorting order
     const sortOrder = order === "asc" ? "createdAt:asc" : "createdAt:desc"
@@ -28,12 +27,12 @@ export async function fetchBooks(order = "asc") {
     }
 
     // Fetch data from the GraphQL API
-    const data = await fetchGraphQL(BOOKS_QUERY, variables)
+    const data = await fetchGraphQL(ADAPTATION_QUERY, variables)
 
     // Return the books or an empty array if no data
-    return data?.books || []
+    return data?.adaptations || []
   } catch (error) {
-    console.error("Error fetching books:", error.message)
+    console.error("Error fetching films:", error.message)
     return []
   }
 }

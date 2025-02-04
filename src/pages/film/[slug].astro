@@ -1,0 +1,161 @@
+---
+import Layout from "../../layouts/Layout.astro"
+import InfoWrapper from "../../components/InfoWrapper.astro"
+// import FooterLink from "../../components/FooterLink.astro"
+import Carousel from "../../components/Carousel.astro"
+import { fetchFilms } from "../../utils/fetchFilms"
+import { fetchFilm } from "../../utils/fetchFilm"
+import ImageGallery from "../../components/ImageGallery.astro"
+import {
+  replaceUnderscoresWithSpaces,
+  wrapNamesInSpan,
+} from "../../utils/formatText"
+
+const { slug, primaryColor = "#292929" } = Astro.params
+const film = await fetchFilm(slug)
+
+if (!film) {
+  throw new Error("film not found")
+}
+
+// Generate static paths at build time
+export async function getStaticPaths() {
+  const films = await fetchFilms()
+
+  return films.map((film: { slug: string }) => ({
+    params: { slug: film.slug },
+  }))
+}
+---
+
+<Layout
+  sectionTitle="Film"
+  classNames={["film", "single-film", film.slug]}
+  pageTitle=`${film.Title} | Elmore Leonard`
+  sectionColor=`${primaryColor}`
+>
+  <div class="billboard">
+    <picture>
+      <source srcset={film.BillboardImage?.url} media="(min-width: 768px)" />
+      <img src={film.BillboardImageMobile?.url} alt={film.title} />
+    </picture>
+    <h1>{film.Title}</h1>
+  </div>
+  <!-- film Content -->
+  <section class="section-wrapper white">
+    <InfoWrapper title="The Run Down." primaryColor="#ec424b">
+      <div slot="main">
+        <p class="synopsis" set:html={film.Synopsis} />
+      </div>
+      <div slot="side">
+        {
+          film.Year && (
+            <p>
+              <strong>Release Year:</strong> {film.Year}
+            </p>
+          )
+        }
+        {
+          film.SourceMaterial.length > 0 &&
+            film.SourceMaterial.map(
+              (
+                source: {
+                  Type: string
+                  book?: { Title: string; slug: string }
+                },
+                index: number
+              ) => (
+                <p>
+                  <strong>Source:</strong>
+                  {source.book ? (
+                    <a href={`/books/${source.book.slug}`}>
+                      {replaceUnderscoresWithSpaces(source.Type)} (
+                      {source.book.Title})
+                    </a>
+                  ) : (
+                    `${replaceUnderscoresWithSpaces(source.Type)}`
+                  )}
+                </p>
+              )
+            )
+        }
+        {
+          film.Director && (
+            <p>
+              <strong>Director:</strong>{" "}
+              <span set:html={wrapNamesInSpan(film.Director)} />
+            </p>
+          )
+        }
+        {
+          film.Writers && (
+            <p>
+              <strong>Written by:</strong>{" "}
+              <span set:html={wrapNamesInSpan(film.Writers)} />
+            </p>
+          )
+        }
+        {
+          film.Studio && (
+            <p>
+              <strong>Production:</strong>{" "}
+              <span set:html={wrapNamesInSpan(film.Studio)} />
+            </p>
+          )
+        }
+        {
+          film.Starring && (
+            <p>
+              <strong>Starring:</strong>{" "}
+              <span set:html={wrapNamesInSpan(film.Starring)} />
+            </p>
+          )
+        }
+        {
+          film.Runtime && (
+            <p>
+              <strong>Runtime:</strong> {film.Runtime} Minutes
+            </p>
+          )
+        }
+      </div>
+    </InfoWrapper>
+  </section>
+  <!-- /film Content -->
+  <!-- film Slides -->
+  {film.Slides && <Carousel slides={film.Slides} />}
+  <!-- /film Slides -->
+  <!-- Covers -->
+  {
+    film.Posters.length > 0 && (
+      <section class="section-wrapper white">
+        <ImageGallery images={film.Posters} title="Movie Posters" />
+      </section>
+    )
+  }
+  <!-- /Covers -->
+  <!-- Footer Links -->
+  <!-- <footer>
+    {
+      film.Nextfilms?.films.map(
+        (
+          nextfilm: {
+            Title: string
+            FooterImage: { url: string }
+            slug: string
+            PrimaryColor: string
+          },
+          index: number
+        ) => (
+          <FooterLink
+            className="next-link"
+            href={`/films/${nextfilm.slug}`}
+            label={nextfilm.Title}
+            imgSrc={nextfilm.FooterImage.url}
+            bgColor={nextfilm.PrimaryColor}
+          />
+        )
+      )
+    }
+  </footer> -->
+</Layout>
