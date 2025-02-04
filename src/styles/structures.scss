@@ -163,3 +163,23 @@
     }
   }
 }
+
+.single-book, .single-film {
+  .side-column{
+    a{
+      color: variables.$body-grey;
+      text-decoration: none;
+      border-bottom: 1px rgba(variables.$body-grey, .6) dotted;
+      transition: padding .2s variables.$nice-bezier;
+      &:hover {
+        padding-bottom: 2px;
+      }
+    }
+    strong{
+      color: variables.$el-pink;
+    }
+    span.name{
+      white-space: nowrap;
+    }
+  }
+}

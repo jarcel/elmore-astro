@@ -16,7 +16,7 @@
         transition: transform 4s variables.$nice-bezier, opacity .2s variables.$nice-bezier;
         backface-visibility: hidden;
       }
-    a{
+    a.wrapper-link{
       position: absolute;
       display: block;
       top: 0;
@@ -27,7 +27,7 @@
       transition: opacity .2s variables.$nice-bezier;
       backface-visibility: hidden;
       text-decoration: none;
-      span {
+      span.title {
           position: absolute;
           width: 100%;
           transform: translateY(-50%);
@@ -47,14 +47,50 @@
           }
         }
     }
+    &.cta-tile{
+      background-color: white;
+        opacity: 0;
+        animation: fadeIn 0.6s variables.$nice-bezier forwards;
+        font-size: 2rem;
+        line-height: 2.5rem;
+        font-weight: 300;
+      
+        a {
+          padding: 2rem;
+          opacity: 1;
+          display: flex;
+          align-items: center;
+          color: variables.$light-grey;
+      
+          span {
+            span {
+              color: variables.$el-pink;
+              text-decoration: underline;
+            }
+          }
+      
+          .highlight {
+            text-decoration: underline;
+          }
+        }
+      
+        @media screen and (min-width: variables.$screen-md) {
+          font-size: 3.4rem;
+          line-height: 4rem;
+      
+          a {
+            padding: 3rem;
+          }
+        }
+    }
   }
   @media (min-width: variables.$screen-md) {
     .tile{
       flex: 0 0 25%;
       &:hover{
-        a {
+        a.wrapper-link {
             opacity: 1;
-            span {
+            span.title {
               top: 50%;
             }
           }

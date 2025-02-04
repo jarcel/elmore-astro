@@ -1,9 +1,56 @@
 ---
 import Layout from "../../layouts/Layout.astro"
 import BookTile from "../../components/BookTile.astro"
+import CtaTile from "../../components/CtaTile.astro"
 import { fetchBooks } from "../../utils/fetchBooks"
 
 const books = await fetchBooks("asc")
+
+// CTA Tiles Data
+const ctaTiles = [
+  {
+    type: "cta",
+    content: `Check out the <span>Films</span> his Books Inspired`,
+    link: "/film",
+  },
+  {
+    type: "cta",
+    content: "The Dickens of Detroit",
+    link: "/dutch",
+  },
+  {
+    type: "cta",
+    content: "Latest News",
+    link: "/news",
+  },
+]
+
+// Calculate how many CTAs are needed to keep the grid even (4 per row)
+const booksLength = books.length
+const tilesNeeded = (4 - (booksLength % 4)) % 4
+
+// Randomly select the necessary number of CTAs
+const selectedCtas = [...ctaTiles]
+  .sort(() => Math.random() - 0.5) // Shuffle CTA array
+  .slice(0, tilesNeeded)
+
+// Merge books & CTAs while ensuring **completely random positions**
+const mergedTiles = [...books]
+
+// Generate unique random insertion positions
+const insertPositions = new Set<number>()
+while (insertPositions.size < tilesNeeded) {
+  let randomPos = Math.floor(Math.random() * (mergedTiles.length + 1)) // Any position within the array
+  insertPositions.add(randomPos) // Ensures uniqueness
+}
+
+// Convert set to sorted array (to avoid shifting issues during insertion)
+const sortedPositions = [...insertPositions].sort((a, b) => a - b)
+
+// Insert CTAs at the chosen positions
+sortedPositions.forEach((pos, i) =>
+  mergedTiles.splice(pos + i, 0, selectedCtas[i])
+)
 ---
 
 <Layout
@@ -13,32 +60,25 @@ const books = await fetchBooks("asc")
 >
   <section class="media-grid book-list">
     {
-      books.length > 0 ? (
-        books.map(
-          (
-            book: {
-              documentId: string
-              Title: string
-              Year: number
-              Thumbnail?: { url: string }
-              PrimaryColor?: string
-              slug: string
-            },
-            index: number
-          ) => (
-            <BookTile
-              key={book.documentId}
-              title={book.Title}
-              year={book.Year}
-              thumbnailUrl={book.Thumbnail?.url || "/default-thumbnail.jpg"}
-              slug={book.slug}
-              index={index}
-              primaryColor={book.PrimaryColor}
-            />
-          )
+      mergedTiles.map((tile, index) =>
+        tile.type === "cta" ? (
+          <CtaTile
+            key={`cta-${index}`}
+            content={tile.content}
+            link={tile.link}
+            index={index}
+          />
+        ) : (
+          <BookTile
+            key={tile.documentId}
+            title={tile.Title}
+            year={tile.Year}
+            thumbnailUrl={tile.Thumbnail?.url}
+            slug={tile.slug}
+            index={index}
+            primaryColor={tile.PrimaryColor}
+          />
         )
-      ) : (
-        <p>No books available.</p>
       )
     }
   </section>
