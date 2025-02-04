@@ -10,9 +10,6 @@ import { replaceUnderscoresWithSpaces } from "../../utils/formatText"
 
 const { slug } = Astro.params
 const book = await fetchBook(slug)
-
-console.log(book.Slides)
-
 if (!book) {
   throw new Error("Book not found")
 }
