@@ -1,7 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro"
 import InfoWrapper from "../../components/InfoWrapper.astro"
-// import FooterLink from "../../components/FooterLink.astro"
+import FooterLink from "../../components/FooterLink.astro"
 import Carousel from "../../components/Carousel.astro"
 import { fetchFilms } from "../../utils/fetchFilms"
 import { fetchFilm } from "../../utils/fetchFilm"
@@ -10,9 +10,12 @@ import {
   replaceUnderscoresWithSpaces,
   wrapNamesInSpan,
 } from "../../utils/formatText"
+import type { StringOptionsWithoutImporter } from "sass"
 
 const { slug, primaryColor = "#292929" } = Astro.params
-const film = await fetchFilm(slug)
+const {film, nextAdaptations} = await fetchFilm(slug)
+
+console.log(nextAdaptations)
 
 if (!film) {
   throw new Error("film not found")
@@ -153,15 +156,14 @@ export async function getStaticPaths() {
   }
   <!-- /Covers -->
   <!-- Footer Links -->
-  <!-- <footer>
+  <footer>
     {
-      film.Nextfilms?.films.map(
+      nextAdaptations.map(
         (
           nextfilm: {
             Title: string
             FooterImage: { url: string }
             slug: string
-            PrimaryColor: string
           },
           index: number
         ) => (
@@ -170,10 +172,9 @@ export async function getStaticPaths() {
             href={`/films/${nextfilm.slug}`}
             label={nextfilm.Title}
             imgSrc={nextfilm.FooterImage.url}
-            bgColor={nextfilm.PrimaryColor}
           />
         )
       )
     }
-  </footer> -->
+  </footer>
 </Layout>
