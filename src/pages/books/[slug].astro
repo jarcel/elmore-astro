@@ -6,9 +6,12 @@ import Carousel from "../../components/Carousel.astro"
 import { fetchBook } from "../../utils/fetchBook"
 import { fetchBooks } from "../../utils/fetchBooks"
 import ImageGallery from "../../components/ImageGallery.astro"
+import { replaceUnderscoresWithSpaces } from "../../utils/formatText"
 
 const { slug } = Astro.params
 const book = await fetchBook(slug)
+
+console.log(book.Slides)
 
 if (!book) {
   throw new Error("Book not found")
@@ -26,7 +29,7 @@ export async function getStaticPaths() {
 
 <Layout
   sectionTitle="Books"
-  classNames={["book", book.slug]}
+  classNames={["book", "single-book", book.slug]}
   pageTitle=`${book.Title} | Elmore Leonard`
   sectionColor=`${book.PrimaryColor}`
 >
@@ -64,6 +67,40 @@ export async function getStaticPaths() {
             </span>
           </p>
         )}
+        {book.Adaptation.length > 0 && (
+  <p>
+    <span>
+      <strong style={{ color: book.PrimaryColor }}>
+        {book.Adaptation.length > 1 ? "Adaptations:" : "Adaptation:"}
+      </strong>{" "}
+      {
+        book.Adaptation.map((adaptation: {
+          Type: string
+          adaptation: {
+            Title: string
+            Year: string
+            slug: string
+          }
+        }, index: number) => (
+          <span>
+            {adaptation.adaptation && adaptation.adaptation.Title === book.Title ? (
+              <a href={`/film/${adaptation.adaptation.slug}`}>
+                {replaceUnderscoresWithSpaces(adaptation.Type)} ({adaptation.adaptation.Year})
+              </a>
+            ) : adaptation.adaptation ? (
+              <a href={`/film/${adaptation.adaptation.slug}`}>
+                {replaceUnderscoresWithSpaces(adaptation.Type)} ({adaptation.adaptation.Title})
+              </a>
+            ) : (
+              replaceUnderscoresWithSpaces(adaptation.Type)
+            )}
+            {index < book.Adaptation.length - 1 && ", "} {/* Add comma between items */}
+          </span>
+        ))
+      }
+    </span>
+  </p>
+)}
         { book.Locations.length > 0 && (
           <p>
             <span>

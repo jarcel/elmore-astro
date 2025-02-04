@@ -3,6 +3,7 @@ import SlideTagline from "./SlideTagline.astro"
 import SlideReview from "./SlideReview.astro"
 import SlideCharacter from "./SlideCharacter.astro"
 import SlideBook from "./SlideBook.astro"
+import SlideAdaptation from "./SlideAdaptation.astro"
 
 const { slides = [], primaryColor = "#292929" } = Astro.props
 ---
@@ -46,6 +47,15 @@ const { slides = [], primaryColor = "#292929" } = Astro.props
                     slug={slide.book.slug}
                     title={slide.book.Title}
                     bgColor={slide.book.PrimaryColor}
+                  />
+                )
+              case "ComponentSlidesAdaptation":
+                return (
+                  <SlideAdaptation
+                    content={slide.Content}
+                    title={slide.adaptation.Title}
+                    slug={slide.adaptation.slug}
+                    adaptationImage={slide.AdaptationImage?.url}
                   />
                 )
               default:

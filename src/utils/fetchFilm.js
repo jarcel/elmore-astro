@@ -14,6 +14,9 @@ const ADAPTATION_QUERY = gql`
       Year
       Studio
       Runtime
+      SeriesLength
+      Developed
+      Episodes
       BillboardImage {
         url
       }

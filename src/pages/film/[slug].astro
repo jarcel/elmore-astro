@@ -49,35 +49,46 @@ export async function getStaticPaths() {
       </div>
       <div slot="side">
         {
-          film.Year && (
+          film.Type === "TV_Show" ? (
+            <p>
+              <strong>Series run:</strong> {film.SeriesLength}
+            </p>
+            <p>
+              <strong>Episodes:</strong> {film.Episodes}
+            </p>
+          ) : (
             <p>
               <strong>Release Year:</strong> {film.Year}
             </p>
           )
         }
         {
-          film.SourceMaterial.length > 0 &&
-            film.SourceMaterial.map(
-              (
-                source: {
-                  Type: string
-                  book?: { Title: string; slug: string }
-                },
-                index: number
-              ) => (
-                <p>
-                  <strong>Source:</strong>
-                  {source.book ? (
-                    <a href={`/books/${source.book.slug}`}>
-                      {replaceUnderscoresWithSpaces(source.Type)} (
-                      {source.book.Title})
-                    </a>
-                  ) : (
-                    `${replaceUnderscoresWithSpaces(source.Type)}`
-                  )}
-                </p>
-              )
-            )
+          film.SourceMaterial.length > 0 && (
+            <p>
+              <strong>Source:</strong>{" "}
+              {film.SourceMaterial.map(
+                (
+                  source: {
+                    Type: string
+                    book: { slug: string; Title: string }
+                  },
+                  index: number
+                ) => (
+                  <span style={{ display: "inline-block" }}>
+                    {source.book ? (
+                      <a href={`/books/${source.book.slug}`}>
+                        {replaceUnderscoresWithSpaces(source.Type)} (
+                        {source.book.Title})
+                      </a>
+                    ) : (
+                      replaceUnderscoresWithSpaces(source.Type)
+                    )}
+                    {index < film.SourceMaterial.length - 1 ? ", " : ""}
+                  </span>
+                )
+              )}
+            </p>
+          )
         }
         {
           film.Director && (
@@ -102,6 +113,13 @@ export async function getStaticPaths() {
               <span set:html={wrapNamesInSpan(film.Studio)} />
             </p>
           )
+        }
+        {
+          film.Type === "TV_Show" ? (
+            <p>
+              <strong>Developed by:</strong> {film.Developed}
+            </p>
+          ) : null
         }
         {
           film.Starring && (

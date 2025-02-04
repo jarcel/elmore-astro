@@ -47,6 +47,24 @@ const BOOK_QUERY = gql`
             url
           }
         }
+        ... on ComponentSlidesAdaptation {
+          adaptation {
+            Title
+            slug
+          }
+          Content
+          AdaptationImage {
+            url
+          }
+        }
+      }
+      Adaptation {
+        Type
+        adaptation {
+          Title
+          Year
+          slug
+        }
       }
       NextBooks {
         books {
