@@ -1,0 +1,47 @@
+---
+export interface BookSlideProps {
+  content: string
+  slug: string
+  bgColor?: string
+  title: string
+}
+
+const { bgColor, content, title, slug } = Astro.props
+---
+
+<div class="slide book" style=`background-color: ${bgColor}`>
+  <div class="inner">
+    <h2>The Book: <a href=`/books/${slug}`>{title}</a></h2>
+    <p>{content}</p>
+  </div>
+</div>
+
+<style lang="scss">
+  @use "../styles/variables.scss" as variables;
+  .slide.book {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60rem;
+    .inner {
+      padding: 0px 3rem;
+      text-align: left;
+      @media screen and (min-width: variables.$screen-md) {
+        width: 700px;
+      }
+    }
+    h2 {
+      a {
+        color: white;
+        text-decoration: none;
+        border-bottom: 1px rgba(255, 255, 255, 0.6) solid;
+      }
+    }
+    p {
+      margin: 1em 0;
+      font-size: 1.6rem;
+      line-height: 3.5rem;
+    }
+  }
+</style>

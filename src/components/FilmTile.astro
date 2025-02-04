@@ -1,26 +1,22 @@
 ---
-export interface BookProps {
+export interface FilmProps {
   title: string
   thumbnailUrl: string
   index?: number
   slug: string
-  primaryColor?: string
 }
 
-const { title, slug, thumbnailUrl, index = 0, primaryColor } = Astro.props
+const { title, slug, thumbnailUrl, index = 0 } = Astro.props
 ---
 
-<article
-  class="tile book-tile"
-  style={`background: ${primaryColor}; animation-delay: ${index * 0.1}s`}
->
+<article class="tile film-tile" style={`animation-delay: ${index * 0.1}s`}>
   <img
     src={thumbnailUrl}
     alt={`Thumbnail of ${title}`}
-    class="book-thumbnail"
+    class="film-thumbnail"
     decoding="async"
   />
-  <a class="wrapper-link" href={`/books/${slug}`}>
+  <a class="wrapper-link" href={`/film/${slug}`}>
     <span class="title">{title}</span>
   </a>
 </article>
@@ -35,7 +31,8 @@ const { title, slug, thumbnailUrl, index = 0, primaryColor } = Astro.props
       opacity: 1;
     }
   }
-  .book-tile {
+  .film-tile {
+    background-color: variables.$body-grey;
     opacity: 0;
     animation: fadeIn 0.6s variables.$nice-bezier forwards;
   }

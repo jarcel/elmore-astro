@@ -16,7 +16,7 @@ const { bgColor, content, credit, publicationImage } = Astro.props
         <img src={publicationImage} alt={credit} class="publication-image" />
       )
     }
-    <p>{content}</p>
+    <p set:html={content} />
     <span class="credit">&mdash; {credit}</span>
   </div>
 </div>
