@@ -1,0 +1,37 @@
+---
+export interface CTAProps {
+  content: string
+  link: string
+  index?: number
+}
+
+const { content, link, index = 0 } = Astro.props
+---
+
+<article
+  class="tile cta-tile"
+  style={`background: white; animation-delay: ${index * 0.1}s`}
+>
+  <a class="wrapper-link" href={`${link}`}>
+    <span>
+      <Fragment set:html={content} />
+    </span>
+  </a>
+</article>
+
+<style lang="scss">
+  @use "../styles/variables.scss" as variables;
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  .cta-tile {
+    background-color: white;
+    opacity: 0;
+    animation: fadeIn 0.6s variables.$nice-bezier forwards;
+  }
+</style>
