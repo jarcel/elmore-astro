@@ -44,6 +44,7 @@ const ADAPTATION_QUERY = gql`
           PublicationImage {
             url
           }
+          StarRating
           Credit
         }
         ... on ComponentSlidesBook {

@@ -1,12 +1,14 @@
 ---
+import StarRating from "./StarRating.astro"
 export interface ReviewProps {
   content: string
   publicationImage?: string
   bgColor?: string
   credit: string
+  rating?: number
 }
 
-const { bgColor, content, credit, publicationImage } = Astro.props
+const { bgColor, content, credit, publicationImage, rating = 0 } = Astro.props
 ---
 
 <div class="slide review" style=`background: ${bgColor}`>
@@ -17,6 +19,7 @@ const { bgColor, content, credit, publicationImage } = Astro.props
       )
     }
     <p set:html={content} />
+    {rating > 0 && <StarRating rating={rating} />}
     <span class="credit">&mdash; {credit}</span>
   </div>
 </div>

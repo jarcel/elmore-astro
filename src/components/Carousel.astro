@@ -29,6 +29,7 @@ const { slides = [], primaryColor = "#292929" } = Astro.props
                     publicationImage={slide.PublicationImage?.url}
                     credit={slide.Credit}
                     bgColor={primaryColor}
+                    rating={slide.StarRating}
                   />
                 )
               case "ComponentSlidesCharacter":
