@@ -1,0 +1,85 @@
+---
+import Layout from "../../../layouts/Layout.astro"
+import BookTile from "../../../components/BookTile.astro"
+import {
+  fetchBooksByCharacter,
+  fetchCharacters,
+} from "../../../utils/fetchBooksByCharacter"
+
+// Get the character slug from the route
+const { character } = Astro.params
+
+// Fetch books that belong to the selected character
+const books = await fetchBooksByCharacter(character)
+
+if (!books.length) {
+  throw new Error(`No books found for character: ${character}`)
+}
+
+// Generate static pages for each character
+export async function getStaticPaths() {
+  const characters: { slug: string }[] = await fetchCharacters() // Fetch all characters from CMS
+
+  return characters.map(({ slug }) => ({
+    params: { character: slug },
+  }))
+}
+---
+
+<Layout
+  sectionTitle="Books"
+  classNames={["book-index", "character-index"]}
+  pageTitle={`Books | Elmore Leonard`}
+>
+  <div class="index-banner">
+    <p>Books featuring {character.replace("-", " ")}</p>
+  </div>
+  <section class="media-grid book-list">
+    {
+      books.map(
+        (
+          book: {
+            documentId: string
+            Title: string
+            Year: string
+            Thumbnail: { url: string }
+            slug: string
+            PrimaryColor: string
+          },
+          index: number
+        ) => (
+          <BookTile
+            key={book.documentId}
+            title={book.Title}
+            year={book.Year}
+            thumbnailUrl={book.Thumbnail?.url || "/default-thumbnail.jpg"}
+            slug={book.slug}
+            index={index}
+            primaryColor={book.PrimaryColor}
+          />
+        )
+      )
+    }
+  </section>
+</Layout>
+
+<style lang="scss">
+  @use "../../../styles/variables.scss" as variables;
+  .index-banner {
+    position: relative;
+    width: 100%;
+    padding: 3rem;
+    padding-right: 10rem;
+    background: variables.$el-pink;
+    font-size: 1.8rem;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 800;
+    transform: translateY(0);
+    transition: all 0.2s variables.$nice-bezier;
+    @media screen and (min-width: variables.$screen-sm) {
+      font-size: 3rem;
+      padding-right: 3rem;
+    }
+  }
+</style>

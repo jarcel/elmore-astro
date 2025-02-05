@@ -1,0 +1,85 @@
+---
+import Layout from "../../../layouts/Layout.astro"
+import BookTile from "../../../components/BookTile.astro"
+import {
+  fetchBooksByLocation,
+  fetchLocations,
+} from "../../../utils/fetchBooksByLocation"
+
+// Get the location slug from the route
+const { location } = Astro.params
+
+// Fetch books that belong to the selected location
+const books = await fetchBooksByLocation(location)
+
+if (!books.length) {
+  throw new Error(`No books found for location: ${location}`)
+}
+
+// Generate static pages for each location
+export async function getStaticPaths() {
+  const locations: { slug: string }[] = await fetchLocations() // Fetch all locations from CMS
+
+  return locations.map(({ slug }) => ({
+    params: { location: slug },
+  }))
+}
+---
+
+<Layout
+  sectionTitle="Books"
+  classNames={["book-index", "location-index"]}
+  pageTitle={`Books | Elmore Leonard`}
+>
+  <div class="index-banner">
+    <p>Books set in {location.replace("-", " ")}</p>
+  </div>
+  <section class="media-grid book-list">
+    {
+      books.map(
+        (
+          book: {
+            documentId: string
+            Title: string
+            Year: string
+            Thumbnail: { url: string }
+            slug: string
+            PrimaryColor: string
+          },
+          index: number
+        ) => (
+          <BookTile
+            key={book.documentId}
+            title={book.Title}
+            year={book.Year}
+            thumbnailUrl={book.Thumbnail?.url || "/default-thumbnail.jpg"}
+            slug={book.slug}
+            index={index}
+            primaryColor={book.PrimaryColor}
+          />
+        )
+      )
+    }
+  </section>
+</Layout>
+
+<style lang="scss">
+  @use "../../../styles/variables.scss" as variables;
+  .index-banner {
+    position: relative;
+    width: 100%;
+    padding: 3rem;
+    padding-right: 10rem;
+    background: variables.$el-pink;
+    font-size: 1.8rem;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 800;
+    transform: translateY(0);
+    transition: all 0.2s variables.$nice-bezier;
+    @media screen and (min-width: variables.$screen-sm) {
+      font-size: 3rem;
+      padding-right: 3rem;
+    }
+  }
+</style>

@@ -1,0 +1,85 @@
+---
+import Layout from "../../../layouts/Layout.astro"
+import BookTile from "../../../components/BookTile.astro"
+import {
+  fetchBooksByGenre,
+  fetchGenres,
+} from "../../../utils/fetchBooksByGenre"
+
+// Get the genre slug from the route
+const { genre } = Astro.params
+
+// Fetch books that belong to the selected genre
+const books = await fetchBooksByGenre(genre)
+
+if (!books.length) {
+  throw new Error(`No books found for genre: ${genre}`)
+}
+
+// Generate static pages for each genre
+export async function getStaticPaths() {
+  const genres: { slug: string }[] = await fetchGenres() // Fetch all genres from CMS
+
+  return genres.map(({ slug }) => ({
+    params: { genre: slug },
+  }))
+}
+---
+
+<Layout
+  sectionTitle="Books"
+  classNames={["book-index", "genre-index"]}
+  pageTitle={`Books | Elmore Leonard`}
+>
+  <div class="index-banner">
+    <p>Books in the {genre.replace("-", " ")} genre</p>
+  </div>
+  <section class="media-grid book-list">
+    {
+      books.map(
+        (
+          book: {
+            documentId: string
+            Title: string
+            Year: string
+            Thumbnail: { url: string }
+            slug: string
+            PrimaryColor: string
+          },
+          index: number
+        ) => (
+          <BookTile
+            key={book.documentId}
+            title={book.Title}
+            year={book.Year}
+            thumbnailUrl={book.Thumbnail?.url || "/default-thumbnail.jpg"}
+            slug={book.slug}
+            index={index}
+            primaryColor={book.PrimaryColor}
+          />
+        )
+      )
+    }
+  </section>
+</Layout>
+
+<style lang="scss">
+  @use "../../../styles/variables.scss" as variables;
+  .index-banner {
+    position: relative;
+    width: 100%;
+    padding: 3rem;
+    padding-right: 10rem;
+    background: variables.$el-pink;
+    font-size: 1.8rem;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 800;
+    transform: translateY(0);
+    transition: all 0.2s variables.$nice-bezier;
+    @media screen and (min-width: variables.$screen-sm) {
+      font-size: 3rem;
+      padding-right: 3rem;
+    }
+  }
+</style>
