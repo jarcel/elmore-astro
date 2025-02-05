@@ -60,7 +60,16 @@ export async function getStaticPaths() {
           <p>
             <span>
               <strong style=`color: ${book.PrimaryColor}`>{book.Genres.length > 1 ? "Genres:" : "Genre:"}</strong>
-              {book.Genres.map((genre: any) => genre.Name).join(", ")}
+              {book.Genres.map((genre: {
+                Name: string
+                slug: string
+              }, index: number) => (
+                  <>
+                    {index > 0 && ", "}
+                    <a href={`/books/genre/${genre.slug}`}>{genre.Name}</a>
+                  </>
+                ))
+              }
             </span>
           </p>
         )}
@@ -102,7 +111,16 @@ export async function getStaticPaths() {
           <p>
             <span>
               <strong style=`color: ${book.PrimaryColor}`>{book.Locations.length > 1 ? "Locations:" : "Location:"}</strong>
-              {book.Locations.map((location: any) => location.Name).join(", ")}
+              {book.Locations.map((location: {
+                Name: string
+                slug: string
+              }, index: number) => (
+                  <>
+                    {index > 0 && ", "}
+                    <a href={`/books/location/${location.slug}`}>{location.Name}</a>
+                  </>
+                ))
+              }
             </span>
           </p>
         )}
@@ -110,7 +128,16 @@ export async function getStaticPaths() {
           <p>
             <span>
               <strong style=`color: ${book.PrimaryColor}`>{book.Characters.length > 1 ? "Characters:" : "Character:"}</strong>
-              {book.Characters.map((character: any) => character.Name).join(", ")}
+              {book.Characters.map((character: {
+                Name: string
+                slug: string
+              }, index: number) => (
+                  <>
+                    {index > 0 && ", "}
+                    <a href={`/books/character/${character.slug}`}>{character.Name}</a>
+                  </>
+                ))
+              }
             </span>
           </p>
         )}

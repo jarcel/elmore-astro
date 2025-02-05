@@ -12,11 +12,13 @@ import {
 } from "../../utils/formatText"
 
 const { slug, primaryColor = "#292929" } = Astro.params
-const {film, nextAdaptations} = await fetchFilm(slug)
+const filmData = await fetchFilm(slug)
 
-if (!film) {
+if (!filmData) {
   throw new Error("film not found")
 }
+
+const { film, nextAdaptations } = filmData
 
 // Generate static paths at build time
 export async function getStaticPaths() {

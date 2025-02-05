@@ -13,13 +13,16 @@ const BOOK_QUERY = gql`
       }
       Characters {
         Name
+        slug
       }
       Genres {
         Name
+        slug
       }
       Synopsis
       Locations {
         Name
+        slug
       }
       PrimaryColor
       BillboardImage {
