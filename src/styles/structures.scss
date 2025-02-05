@@ -28,21 +28,7 @@
 
 .columned{
   padding: 0 3rem;
-  @media screen and (min-width: variables.$screen-md) {
-    &.right{
-      p{
-        padding-left: 50%;
-      }
-    }
-    &.left{
-      p {
-          padding-right: 50%;
-        }
-    }
-  }
 }
-
-
 
 .dutch-bio{
   background: #000 url(/images/bg-dutch.gif) top right no-repeat;

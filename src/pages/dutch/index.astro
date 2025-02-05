@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro"
 import FooterLink from "../../components/FooterLink.astro"
+import StickyImageContainer from "../../components/StickyImageContainer.astro"
 import ExpandableContainer from "../../components/ExpandableContainer.astro"
 ---
 
@@ -48,7 +49,11 @@ import ExpandableContainer from "../../components/ExpandableContainer.astro"
             the name Elmore he has said, “It makes you tough.”
           </p>
         </div>
-        <div class="columned right sticky-container">
+        <StickyImageContainer
+          imageSrc="/images/el-portrait-1.png"
+          altText="Elmore Leonard"
+          imagePosition="left"
+        >
           <p>
             In 1943, Elmore graduated from the University of Detroit High
             School. He wanted to be a Marine but a bad eye prevented him from
@@ -132,8 +137,12 @@ import ExpandableContainer from "../../components/ExpandableContainer.astro"
               >Newsweek</em
             > and being hailed as “the greatest living crime writer.”
           </p>
-        </div>
-        <div class="columned left">
+        </StickyImageContainer>
+        <StickyImageContainer
+          imageSrc="/images/el-portrait-2.png"
+          altText="Elmore Leonard"
+          imagePosition="right"
+        >
           <p>
             His newfound fame only grew as he continued to write one bestseller
             after another: <em>Freaky Deaky</em>, <em>Killshot</em>, <em
@@ -195,7 +204,7 @@ import ExpandableContainer from "../../components/ExpandableContainer.astro"
             Katy, thirteen grandchildren, six great grandchildren, and avid
             readers around the world.
           </p>
-        </div>
+        </StickyImageContainer>
       </ExpandableContainer>
     </div>
   </section>

@@ -1,0 +1,63 @@
+---
+const { imageSrc, altText, children, imagePosition = "left" } = Astro.props
+const isLeft = imagePosition === "left"
+---
+
+<section class={`scroll-container ${isLeft ? "left" : "right"}`}>
+  <div class="image-column">
+    <img src={imageSrc} alt={altText} class="sticky-image" />
+  </div>
+  <div class="text-column">
+    <slot />
+  </div>
+</section>
+
+<style lang="scss">
+  @use "../styles/variables.scss" as variables;
+  .scroll-container {
+    display: flex;
+    gap: 40px;
+    margin: 0 auto;
+    padding: 1rem 3rem;
+    position: relative;
+  }
+
+  .scroll-container.left {
+    flex-direction: row;
+  }
+
+  .scroll-container.right {
+    flex-direction: row-reverse;
+  }
+
+  .image-column {
+    display: none;
+    @media screen and (min-width: variables.$screen-md) {
+      display: block;
+      flex: 1;
+      position: relative;
+      padding: 4rem 0;
+      text-align: center;
+    }
+    img {
+      margin: 4rem 0;
+      width: 100%;
+    }
+  }
+
+  .text-column {
+    flex: 1;
+  }
+</style>
+
+<script>
+  import hcSticky from "hc-sticky"
+
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".sticky-image").forEach((stickyElement) => {
+      new hcSticky(stickyElement, {
+        stickTo: stickyElement.parentNode,
+      })
+    })
+  })
+</script>
