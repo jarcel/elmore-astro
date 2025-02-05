@@ -11,6 +11,10 @@ const BOOKS_QUERY = gql`
       }
       slug
       PrimaryColor
+      Genres {
+        Name
+        slug
+      }
       createdAt
     }
   }
