@@ -1,0 +1,47 @@
+---
+const { rating } = Astro.props
+const fullStars = Math.floor(rating)
+const hasHalfStar = rating % 1 !== 0
+---
+
+<div class="star-rating">
+  {
+    Array(fullStars)
+      .fill(0)
+      .map((_, index) => (
+        <svg viewBox="0 0 24 24" class="star full">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.86L12 17.77l-6.18 3.23L7 14.14l-5-4.87 6.91-1.01L12 2z" />
+        </svg>
+      ))
+  }
+
+  {
+    hasHalfStar && (
+      <svg viewBox="0 0 24 24" class="star half">
+        <defs>
+          <clipPath id="left-half">
+            <rect x="0" y="0" width="12" height="24" />
+          </clipPath>
+        </defs>
+        <path
+          d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.86L12 17.77l-6.18 3.23L7 14.14l-5-4.87 6.91-1.01L12 2z"
+          clip-path="url(#left-half)"
+        />
+      </svg>
+    )
+  }
+</div>
+
+<style>
+  .star-rating {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin: 2rem 0;
+  }
+  .star {
+    width: 24px;
+    height: 24px;
+    fill: white;
+  }
+</style>
