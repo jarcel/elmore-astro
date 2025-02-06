@@ -21,7 +21,7 @@
       height: 7rem;
       margin: 2rem 1rem;
       transform: rotate(-5deg);
-      animation: signIt 1.3s steps(62) forwards 5.5s;
+      animation: signIt 1.3s steps(62) forwards 3.2s;
     
       &.return-visit {
         animation: signIt 1.3s steps(62) forwards 0s;
@@ -29,7 +29,7 @@
     
       @media screen and (min-width: variables.$screen-md) {
         transition: none;
-        animation: signItLarge 1.3s steps(62) forwards 5.5s;
+        animation: signItLarge 1.3s steps(62) forwards 3.2s;
         position: absolute;
         top: 45%;
         left: 20%;
