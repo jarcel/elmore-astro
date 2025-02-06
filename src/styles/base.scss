@@ -3,6 +3,7 @@
 html {
   font-size: 62.5%;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 html,
@@ -29,11 +30,6 @@ body {
   -webkit-font-smoothing: antialiased;
   margin: 0;
   padding: 0;
-
-  // &.news {
-  //   background: #000 url('/img/bg-news.jpg') top center no-repeat fixed;
-  //   background-size: cover;
-  // }d
 
   &.no-scroll {
     overflow: hidden;

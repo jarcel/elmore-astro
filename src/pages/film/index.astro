@@ -1,56 +1,13 @@
 ---
 import Layout from "../../layouts/Layout.astro"
 import FilmTile from "../../components/FilmTile.astro"
-import CtaTile from "../../components/CtaTile.astro"
 import { fetchFilms } from "../../utils/fetchFilms"
 
 const films = await fetchFilms("asc")
 
-// CTA Tiles Data (can be customized)
-const ctaTiles = [
-  {
-    type: "cta",
-    content: "Check out the <span>Books</span> that inspired these films",
-    link: "/books",
-  },
-  {
-    type: "cta",
-    content: "The Dickens of Detroit",
-    link: "/dutch",
-  },
-  {
-    type: "cta",
-    content: "Latest News",
-    link: "/news",
-  },
-]
-
-// Calculate how many CTAs are needed to keep the grid even (4 per row)
-const filmsLength = films.length
-const tilesNeeded = (4 - (filmsLength % 4)) % 4
-
-// Randomly select the necessary number of CTAs
-const selectedCtas = [...ctaTiles]
-  .sort(() => Math.random() - 0.5) // Shuffle CTA array
-  .slice(0, tilesNeeded)
-
-// Merge films & CTAs while ensuring **completely random positions**
-const mergedTiles = [...films]
-
-// Generate unique random insertion positions
-const insertPositions = new Set<number>()
-while (insertPositions.size < tilesNeeded) {
-  let randomPos = Math.floor(Math.random() * (mergedTiles.length + 1)) // Random position in the array
-  insertPositions.add(randomPos) // Ensure uniqueness
+if (!films.length) {
+  throw new Error(`No books found.`)
 }
-
-// Convert set to sorted array (to avoid shifting issues during insertion)
-const sortedPositions = [...insertPositions].sort((a, b) => a - b)
-
-// Insert CTAs at the chosen positions
-sortedPositions.forEach((pos, i) =>
-  mergedTiles.splice(pos + i, 0, selectedCtas[i])
-)
 ---
 
 <Layout
@@ -60,21 +17,23 @@ sortedPositions.forEach((pos, i) =>
 >
   <section class="media-grid book-list">
     {
-      mergedTiles.map((tile, index) =>
-        tile.type === "cta" ? (
-          <CtaTile
-            key={`cta-${index}`}
-            content={tile.content}
-            link={tile.link}
-            index={index}
-          />
-        ) : (
+      films.map(
+        (
+          film: {
+            documentId: string
+            Title: string
+            Year: string
+            Thumbnail: { url: string }
+            slug: string
+          },
+          index: number
+        ) => (
           <FilmTile
-            key={tile.documentId}
-            title={tile.Title}
-            year={tile.Year}
-            thumbnailUrl={tile.Thumbnail?.url || "/default-thumbnail.jpg"}
-            slug={tile.slug}
+            key={film.documentId}
+            title={film.Title}
+            year={film.Year}
+            thumbnailUrl={film.Thumbnail?.url}
+            slug={film.slug}
             index={index}
           />
         )

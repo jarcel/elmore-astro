@@ -31,8 +31,7 @@
           position: absolute;
           width: 100%;
           transform: translateY(-50%);
-          transition: top .2s variables.$nice-bezier;
-          top: 0;
+          will-change: transform;
           text-align: left;
           color: #FFF;
           display: block;
@@ -45,43 +44,29 @@
             font-size: 3.4rem;
             line-height: 4.0rem;
           }
+          @media (min-width: variables.$screen-md) {
+            transition: top .2s variables.$nice-bezier;
+            top:0;
+          }
         }
     }
-    &.cta-tile{
-      background-color: white;
-        opacity: 0;
-        animation: fadeIn 0.6s variables.$nice-bezier forwards;
-        font-size: 2rem;
-        line-height: 2.5rem;
-        font-weight: 300;
-      
-        a {
-          padding: 2rem;
+    &.book.tile{
+      span.title{
+        top: 0;
+      }
+    }
+    &.film-tile{
+      @media (max-width: variables.$screen-md){
+        a.wrapper-link{
           opacity: 1;
-          display: flex;
-          align-items: center;
-          color: variables.$light-grey;
-      
-          span {
-            span {
-              color: variables.$el-pink;
-              text-decoration: underline;
-            }
-          }
-      
-          .highlight {
-            text-decoration: underline;
-          }
         }
-      
-        @media screen and (min-width: variables.$screen-md) {
-          font-size: 3.4rem;
-          line-height: 4rem;
-      
-          a {
-            padding: 3rem;
-          }
+        span.title{
+          top: 50%;
         }
+        img {
+          opacity: .4;
+        }
+      }
     }
   }
   @media (min-width: variables.$screen-md) {

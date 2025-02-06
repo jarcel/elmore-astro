@@ -42,6 +42,10 @@ const isLeft = imagePosition === "left"
     img {
       margin: 4rem 0;
       width: 100%;
+      will-change: transform;
+      transform: translateZ(0);
+      contain: paint;
+      backface-visibility: hidden;
     }
   }
 
