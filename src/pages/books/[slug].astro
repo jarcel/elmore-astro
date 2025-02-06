@@ -104,19 +104,18 @@ export async function getStaticPaths() {
                       {adaptation.adaptation &&
                       adaptation.adaptation.Title === book.Title ? (
                         <a href={`/film/${adaptation.adaptation.slug}`}>
-                          {replaceUnderscoresWithSpaces(adaptation.Type)} (
-                          {adaptation.adaptation.Year})
+                          {replaceUnderscoresWithSpaces(adaptation.Type)}
+                          {`(${adaptation.adaptation.Year})`}
                         </a>
                       ) : adaptation.adaptation ? (
                         <a href={`/film/${adaptation.adaptation.slug}`}>
-                          {replaceUnderscoresWithSpaces(adaptation.Type)} (
-                          {adaptation.adaptation.Title})
+                          {replaceUnderscoresWithSpaces(adaptation.Type)}
+                          {`(${adaptation.adaptation.Title})`}
                         </a>
                       ) : (
                         replaceUnderscoresWithSpaces(adaptation.Type)
                       )}
                       {index < book.Adaptation.length - 1 && ", "}{" "}
-                      {/* Add comma between items */}
                     </span>
                   )
                 )}
