@@ -2,8 +2,7 @@ import { gql } from "graphql-request"
 import { fetchGraphQL } from "./fetchGraphQL"
 
 const ADAPTATION_QUERY = gql`
-  query Adaptations($slug: String!, $year: Int!) {
-    # Fetch the current adaptation
+  query Adaptations($slug: String!) {
     adaptations(filters: { slug: { eq: $slug } }) {
       Title
       slug
@@ -18,6 +17,15 @@ const ADAPTATION_QUERY = gql`
       SeriesLength
       Developed
       Episodes
+      NextFilms {
+        films {
+          Title
+          slug
+          FooterImage {
+            url
+          }
+        }
+      }
       BillboardImage {
         url
       }
@@ -44,7 +52,6 @@ const ADAPTATION_QUERY = gql`
           PublicationImage {
             url
           }
-          StarRating
           Credit
         }
         ... on ComponentSlidesBook {
@@ -57,50 +64,20 @@ const ADAPTATION_QUERY = gql`
         }
       }
     }
-
-    # Fetch the next three adaptations after this one
-    nextAdaptations: adaptations(
-      filters: { Year: { gt: $year } } # Get adaptations after the current one's year
-      pagination: { pageSize: 3 } # Only get the next 3
-      sort: "Year:asc" # Ensure they're the next ones in chronological order
-    ) {
-      Title
-      slug
-      Year
-      FooterImage {
-        url
-      }
-    }
   }
 `
 
 export async function fetchFilm(slug) {
   try {
-    // First, fetch the adaptation to get its Year
-    const initialData = await fetchGraphQL(
-      gql`
-        query GetYear($slug: String!) {
-          adaptations(filters: { slug: { eq: $slug } }) {
-            Year
-          }
-        }
-      `,
-      { slug }
-    )
-
-    if (!initialData?.adaptations?.length) return null
-
-    const filmYear = initialData.adaptations[0].Year
-
-    // Now fetch the film + next 3 adaptations
-    const variables = { slug, year: filmYear }
-    const data = await fetchGraphQL(ADAPTATION_QUERY, variables)
-
-    if (!data?.adaptations) return null
+    const data = await fetchGraphQL(ADAPTATION_QUERY, { slug })
+    if (!data || !data.adaptations || data.adaptations.length === 0) {
+      return null
+    }
+    const film = data.adaptations[0]
 
     return {
-      film: data.adaptations[0],
-      nextAdaptations: data.nextAdaptations || [],
+      film,
+      nextFilms: film.NextFilms?.films || [],
     }
   } catch (error) {
     console.error("Error fetching adaptation:", error.message)

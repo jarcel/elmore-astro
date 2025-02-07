@@ -18,7 +18,7 @@ if (!filmData) {
   throw new Error("film not found")
 }
 
-const { film, nextAdaptations } = filmData
+const { film, nextFilms } = filmData
 
 // Generate static paths at build time
 export async function getStaticPaths() {
@@ -157,7 +157,7 @@ export async function getStaticPaths() {
   <!-- Footer Links -->
   <footer>
     {
-      nextAdaptations.map(
+      nextFilms.map(
         (
           nextfilm: {
             Title: string
