@@ -35,7 +35,7 @@ export async function fetchBooksByGenre(genreSlug) {
 export async function fetchGenres() {
   const QUERY = gql`
     query {
-      genres {
+      genres(pagination: { limit: 100 }) {
         Name
         slug
       }

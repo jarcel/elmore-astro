@@ -35,7 +35,7 @@ export async function fetchBooksByCharacter(characterSlug) {
 export async function fetchCharacters() {
   const QUERY = gql`
     query {
-      characters {
+      characters(pagination: { limit: 100 }) {
         Name
         slug
       }

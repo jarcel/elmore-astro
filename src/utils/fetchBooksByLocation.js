@@ -35,7 +35,7 @@ export async function fetchBooksByLocation(locationSlug) {
 export async function fetchLocations() {
   const QUERY = gql`
     query {
-      locations {
+      locations(pagination: { limit: 100 }) {
         Name
         slug
       }
