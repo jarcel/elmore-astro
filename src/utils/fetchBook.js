@@ -85,7 +85,7 @@ const BOOK_QUERY = gql`
 
 export async function fetchBook(slug) {
   try {
-    const data = await fetchGraphQL(ADAPTATION_QUERY, { slug })
+    const data = await fetchGraphQL(BOOK_QUERY, { slug })
     if (!data || !data.books || data.books.length === 0) {
       return null
     }
