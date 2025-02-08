@@ -2,10 +2,11 @@
 import Layout from "../../layouts/Layout.astro"
 import InfoWrapper from "../../components/InfoWrapper.astro"
 import FooterLink from "../../components/FooterLink.astro"
+import ImageGallery from "../../components/ImageGallery.astro"
 import Carousel from "../../components/Carousel.astro"
+import { generateFilmJsonLd } from "../../utils/generateJsonLd"
 import { fetchFilms } from "../../utils/fetchFilms"
 import { fetchFilm } from "../../utils/fetchFilm"
-import ImageGallery from "../../components/ImageGallery.astro"
 import {
   replaceUnderscoresWithSpaces,
   wrapNamesInSpan,
@@ -14,11 +15,13 @@ import {
 const { slug, primaryColor = "#292929" } = Astro.params
 const filmData = await fetchFilm(slug)
 
+
 if (!filmData) {
   throw new Error("film not found")
 }
 
 const { film, nextFilms } = filmData
+const jsonLd = generateFilmJsonLd(film)
 
 // Generate static paths at build time
 export async function getStaticPaths() {
@@ -35,6 +38,7 @@ export async function getStaticPaths() {
   classNames={["film", "single-film", film.slug]}
   pageTitle={`${film.Title} | Elmore Leonard`}
   sectionColor={primaryColor}
+  jsonLdData={jsonLd}
 >
   <div class="billboard">
     <picture>
