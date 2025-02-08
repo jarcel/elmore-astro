@@ -1,53 +1,47 @@
 /* Regular */
 @font-face {
-  font-family: 'Proxima Nova';
-  src: url('/fonts/proximanova-reg-webfont.eot');
-  src: url('/fonts/proximanova-reg-webfont.eot?#iefix') format('embedded-opentype'),
-    url('/fonts/proximanova-reg-webfont.woff2') format('woff2'),
-    url('/fonts/proximanova-reg-webfont.woff') format('woff'),
-    url('/fonts/proximanova-reg-webfont.ttf') format('truetype'),
-    url('/fonts/proximanova-reg-webfont.svg#lincoln_proxima_novaregular') format('svg');
+  font-family: "Proxima Nova";
   font-weight: normal;
   font-style: normal;
-
+  font-display: swap;
+  src:
+    url("https://elmoreleonard.nyc3.cdn.digitaloceanspaces.com/fonts/proximanova-reg-webfont.woff2") format("woff2"),
+    url("https://elmoreleonard.nyc3.cdn.digitaloceanspaces.com/fonts/proximanova-reg-webfont.woff") format("woff"),
+    url("https://elmoreleonard.nyc3.cdn.digitaloceanspaces.com/fonts/proximanova-reg-webfont.ttf") format("truetype");
 }
 
 /* Light */
 @font-face {
-  font-family: 'Proxima Nova';
-  src: url('/fonts/proximanova-light-webfont.eot');
-  src: url('/fonts/proximanova-light-webfont.eot?#iefix') format('embedded-opentype'),
-    url('/fonts/proximanova-light-webfont.woff2') format('woff2'),
-    url('/fonts/proximanova-light-webfont.woff') format('woff'),
-    url('/fonts/proximanova-light-webfont.ttf') format('truetype'),
-    url('/fonts/proximanova-light-webfont.svg#lincoln_proxima_nova_lightRg') format('svg');
+  font-family: "Proxima Nova";
   font-weight: 300;
   font-style: normal;
+  font-display: swap;
+  src:
+    url("https://elmoreleonard.nyc3.cdn.digitaloceanspaces.com/fonts/proximanova-light-webfont.woff2") format("woff2"),
+    url("https://elmoreleonard.nyc3.cdn.digitaloceanspaces.com/fonts/proximanova-light-webfont.woff") format("woff"),
+    url("https://elmoreleonard.nyc3.cdn.digitaloceanspaces.com/fonts/proximanova-light-webfont.ttf") format("truetype");
 }
 
 /* Bold */
 @font-face {
-  font-family: 'Proxima Nova';
-  src: url('/fonts/proximanova-bold-webfont.eot');
-  src: url('/fonts/proximanova-bold-webfont.eot?#iefix') format('embedded-opentype'),
-    url('/fonts/proximanova-bold-webfont.woff2') format('woff2'),
-    url('/fonts/proximanova-bold-webfont.woff') format('woff'),
-    url('/fonts/proximanova-bold-webfont.ttf') format('truetype'),
-    url('/fonts/proximanova-bold-webfont.svg#lincoln_proxima_novabold') format('svg');
+  font-family: "Proxima Nova";
   font-weight: bold;
   font-style: normal;
+  font-display: swap;
+  src:
+    url("https://elmoreleonard.nyc3.cdn.digitaloceanspaces.com/fonts/proximanova-bold-webfont.woff2") format("woff2"),
+    url("https://elmoreleonard.nyc3.cdn.digitaloceanspaces.com/fonts/proximanova-bold-webfont.woff") format("woff"),
+    url("https://elmoreleonard.nyc3.cdn.digitaloceanspaces.com/fonts/proximanova-bold-webfont.ttf") format("truetype");
 }
 
 /* Black */
 @font-face {
-  font-family: 'Proxima Nova';
-  src: url('/fonts/proximanova-black-webfont.eot');
-  src: url('/fonts/proximanova-black-webfont.eot?#iefix') format('embedded-opentype'),
-    url('/fonts/proximanova-black-webfont.woff2') format('woff2'),
-    url('/fonts/proximanova-black-webfont.woff') format('woff'),
-    url('/fonts/proximanova-black-webfont.ttf') format('truetype'),
-    url('/fonts/proximanova-black-webfont.svg#lincoln_proxima_nova_blackRg') format('svg');
+  font-family: "Proxima Nova";
   font-weight: 900;
   font-style: normal;
-
+  font-display: swap;
+  src:
+    url("https://elmoreleonard.nyc3.cdn.digitaloceanspaces.com/fonts/proximanova-black-webfont.woff2") format("woff2"),
+    url("https://elmoreleonard.nyc3.cdn.digitaloceanspaces.com/fonts/proximanova-black-webfont.woff") format("woff"),
+    url("https://elmoreleonard.nyc3.cdn.digitaloceanspaces.com/fonts/proximanova-black-webfont.ttf") format("truetype");
 }
