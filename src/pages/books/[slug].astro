@@ -215,6 +215,7 @@ export async function getStaticPaths() {
             label={nextBook.Title}
             imgSrc={nextBook.FooterImage.url}
             bgColor={nextBook.PrimaryColor}
+            ariaLabel={`More about ${nextBook.Title}`}
           />
         )
       )

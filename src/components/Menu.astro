@@ -13,7 +13,7 @@ const navLinks = [
 
 <header class="mast">
   <!-- Signature Link -->
-  <a href="/" class="signature"> </a>
+  <a href="/" class="signature" aria-label="Home"> </a>
 
   <!-- Current Section -->
   {
@@ -30,7 +30,7 @@ const navLinks = [
       {
         navLinks.map((link) => (
           <li>
-            <a id={link.id} href={link.href}>
+            <a id={link.id} href={link.href} aria-label={link.label}>
               {link.label}
             </a>
           </li>

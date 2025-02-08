@@ -5,9 +5,17 @@ export interface FooterLinkProps {
   className?: string
   imgSrc?: string
   bgColor?: string
+  ariaLabel?: string
 }
 
-const { href, label, className = "", imgSrc, bgColor } = Astro.props
+const {
+  href,
+  label,
+  className = "",
+  imgSrc,
+  bgColor,
+  ariaLabel = label,
+} = Astro.props
 ---
 
 <div class={`footer-link ${className}`} style={`background-color: ${bgColor}`}>
@@ -16,7 +24,7 @@ const { href, label, className = "", imgSrc, bgColor } = Astro.props
       <div class="nl-image" style={`background-image: url('${imgSrc}')`} />
     )
   }
-  <a href={href}>
+  <a href={href} aria-label={ariaLabel}>
     <span>{label}</span>
   </a>
 </div>

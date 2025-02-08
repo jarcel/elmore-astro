@@ -2,9 +2,11 @@
 // Image type definition
 export interface Image {
   url: string
+  height?: number
+  width?: number
 }
 
-const { images = [], title } = Astro.props
+const { images = [], title, height = 400 } = Astro.props
 ---
 
 <section class="image-gallery">
@@ -15,6 +17,8 @@ const { images = [], title } = Astro.props
         <img
           src={image.url}
           alt="Gallery Image"
+          height={image.height}
+          width={image.width}
           class="gallery-image"
           loading="lazy"
         />
@@ -40,12 +44,16 @@ const { images = [], title } = Astro.props
 
   .image-row {
     display: flex;
+    min-height: 40rem;
     flex-wrap: nowrap;
     overflow-x: auto;
     gap: 2rem;
     padding: 1rem 3rem;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
+    @media screen and (min-width: variables.$screen-md) {
+      height: 50rem;
+    }
   }
 
   .gallery-image {

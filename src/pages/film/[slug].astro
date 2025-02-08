@@ -175,6 +175,7 @@ export async function getStaticPaths() {
             href={`/film/${nextfilm.slug}`}
             label={nextfilm.Title}
             imgSrc={nextfilm.FooterImage.url}
+            ariaLabel={`More about ${nextfilm.Title}`}
           />
         )
       )
