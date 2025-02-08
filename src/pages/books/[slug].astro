@@ -3,9 +3,10 @@ import Layout from "../../layouts/Layout.astro"
 import InfoWrapper from "../../components/InfoWrapper.astro"
 import FooterLink from "../../components/FooterLink.astro"
 import Carousel from "../../components/Carousel.astro"
+import ImageGallery from "../../components/ImageGallery.astro"
 import { fetchBook } from "../../utils/fetchBook"
 import { fetchBooks } from "../../utils/fetchBooks"
-import ImageGallery from "../../components/ImageGallery.astro"
+import { generateBookJsonLd } from "../../utils/generateJsonLd"
 import { replaceUnderscoresWithSpaces } from "../../utils/formatText"
 
 const { slug } = Astro.params
@@ -13,6 +14,7 @@ const book = await fetchBook(slug)
 if (!book) {
   throw new Error("Book not found")
 }
+const jsonLd = generateBookJsonLd(book)
 
 // Generate static paths at build time
 export async function getStaticPaths() {
@@ -29,6 +31,7 @@ export async function getStaticPaths() {
   classNames={["book", "single-book", book.slug]}
   pageTitle={`${book.Title} | Elmore Leonard`}
   sectionColor=`${book.PrimaryColor}`
+  jsonLdData={jsonLd}
 >
   <div class="billboard">
     <picture>
