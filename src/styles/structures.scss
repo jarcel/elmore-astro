@@ -8,7 +8,7 @@
     padding: 10rem 0rem;
   }
   &.black{
-    background-color: black;
+    background-color: #030303;
     color: #FFF;
   }
   &.white{
@@ -31,7 +31,8 @@
 }
 
 .dutch-bio{
-  background: #000 url(/images/bg-dutch.gif) top right no-repeat;
+  background: #030303 url(/images/bg-dutch.webp) top right no-repeat;
+  background-blend-mode:soft-light;
   position: relative;
   background-size: contain;
   width: 100%;   
@@ -40,14 +41,16 @@
   }
   @media screen and (min-width: variables.$screen-md) {
     padding: 4rem 8rem 15rem;
-    background-size: auto;
+    background-size: 70%;
   }
   h1 {
     padding: 0;
     color: variables.$el-pink;
-    margin: 20rem 0 10rem;
+    margin: 20rem auto 10rem;
+    max-width: 40rem;
     @media screen and (min-width: variables.$screen-sm) {
       margin: 20rem auto;
+      max-width: 70rem;
     }
   }
   p {
