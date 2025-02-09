@@ -20,35 +20,27 @@ const jsonLdData = {
     name: "Bloomfield Hills, Michigan, USA",
   },
   nationality: "American",
-  occupation: ["Writer", "Novelist", "Screenwriter"],
+  hasOccupation: [
+    {
+      "@type": "Occupation",
+      name: "Writer",
+    },
+    {
+      "@type": "Occupation",
+      name: "Novelist",
+    },
+    {
+      "@type": "Occupation",
+      name: "Screenwriter",
+    },
+  ],
   sameAs: [
     "https://en.wikipedia.org/wiki/Elmore_Leonard",
     "https://www.imdb.com/name/nm0502033/",
     "https://twitter.com/elmoreleonard",
+    "https://elmoreleonardofficial.com",
   ],
   knowsAbout: ["Crime Fiction", "Western Fiction", "Screenwriting"],
-  notableWorks: [
-    {
-      "@type": "Book",
-      name: "Get Shorty",
-      datePublished: "1990",
-    },
-    {
-      "@type": "Book",
-      name: "Rum Punch",
-      datePublished: "1992",
-    },
-    {
-      "@type": "Book",
-      name: "Out of Sight",
-      datePublished: "1996",
-    },
-    {
-      "@type": "Book",
-      name: "Raylan",
-      datePublished: "2012",
-    },
-  ],
   url: "https://elmoreleonardofficial.com",
 }
 ---
