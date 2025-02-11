@@ -44,7 +44,6 @@ const { images = [], title, height = 400 } = Astro.props
 
   .image-row {
     display: flex;
-    min-height: 40rem;
     flex-wrap: nowrap;
     overflow-x: auto;
     gap: 2rem;
@@ -52,7 +51,7 @@ const { images = [], title, height = 400 } = Astro.props
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     @media screen and (min-width: variables.$screen-md) {
-      height: 50rem;
+      min-height: 50rem;
     }
   }
 
