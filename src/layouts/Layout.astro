@@ -26,6 +26,12 @@ const {
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <link
+      rel="preconnect"
+      href="https://elmoreleonard.nyc3.cdn.digitaloceanspaces.com"
+      crossorigin="anonymous"
+    />
+
     <meta name="generator" content={Astro.generator} />
     <meta
       name="keywords"
@@ -43,7 +49,9 @@ const {
   >
 </html>
 
-<body class:list={[...classNames]}>
-  <Menu sectionTitle={sectionTitle} sectionColor={sectionColor} />
-  <slot />
+<body>
+  <div class:list={classNames}>
+    <Menu sectionTitle={sectionTitle} sectionColor={sectionColor} />
+    <slot />
+  </div>
 </body>
