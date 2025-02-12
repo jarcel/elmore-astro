@@ -76,7 +76,12 @@ export async function getStaticPaths() {
                   ) => (
                     <>
                       {index > 0 && ", "}
-                      <a href={`/books/genre/${genre.slug}`}>{genre.Name}</a>
+                      <a
+                        href={`/books/genre/${genre.slug}`}
+                        aria-label={`Books in the ${genre.Name} genre`}
+                      >
+                        {genre.Name}
+                      </a>
                     </>
                   )
                 )}
@@ -106,12 +111,18 @@ export async function getStaticPaths() {
                     <span>
                       {adaptation.adaptation &&
                       adaptation.adaptation.Title === book.Title ? (
-                        <a href={`/film/${adaptation.adaptation.slug}`}>
+                        <a
+                          href={`/film/${adaptation.adaptation.slug}`}
+                          aria-label={`More about the film ${adaptation.adaptation.Title}`}
+                        >
                           {replaceUnderscoresWithSpaces(adaptation.Type)}
                           {`(${adaptation.adaptation.Year})`}
                         </a>
                       ) : adaptation.adaptation ? (
-                        <a href={`/film/${adaptation.adaptation.slug}`}>
+                        <a
+                          href={`/film/${adaptation.adaptation.slug}`}
+                          aria-label={`More about the film ${adaptation.adaptation.Title}`}
+                        >
                           {replaceUnderscoresWithSpaces(adaptation.Type)}
                           {`(${adaptation.adaptation.Title})`}
                         </a>
@@ -143,7 +154,10 @@ export async function getStaticPaths() {
                   ) => (
                     <>
                       {index > 0 && ", "}
-                      <a href={`/books/location/${location.slug}`}>
+                      <a
+                        href={`/books/location/${location.slug}`}
+                        aria-label={`Books set in ${location.Name}`}
+                      >
                         {location.Name}
                       </a>
                     </>
@@ -170,7 +184,10 @@ export async function getStaticPaths() {
                   ) => (
                     <>
                       {index > 0 && ", "}
-                      <a href={`/books/character/${character.slug}`}>
+                      <a
+                        href={`/books/character/${character.slug}`}
+                        aria-label={`Books featuring ${character.Name}`}
+                      >
                         {character.Name}
                       </a>
                     </>
