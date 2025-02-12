@@ -33,6 +33,7 @@
   right: 2.0rem;
   background: variables.$el-pink;
   margin-left: 5px;
+  will-change: width, height, background, margin;
   transition: all .3s ease-in-out;
   width: 60px;
   height: 60px;
