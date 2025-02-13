@@ -8,12 +8,20 @@ const books = await fetchBooks("asc")
 if (!books.length) {
   throw new Error(`No books found.`)
 }
+
+const pageTitle = `Books | Elmore Leonard`
+const metaDescription = `Explore the books by Elmore Leonard, the 'Dickens of Detroit,' who wrote 45 novels and became one of America’s greatest crime writers. From Westerns to Hollywood hits like Get Shorty and Out of Sight, his sharp dialogue and unforgettable characters defined modern fiction. Discover his legacy.`
+const metaKeywords = `Elmore Leonard, crime novels, western fiction, Get Shorty, Out of Sight`
+const metaImage = `${Astro.site}/images/social/el-opengraph.jpg`
 ---
 
 <Layout
   sectionTitle="Books"
   classNames={["book-index"]}
-  pageTitle="Books | Elmore Leonard"
+  pageTitle={pageTitle}
+  metaDescription={metaDescription}
+  metaKeywords={metaKeywords}
+  metaImage={metaImage}
 >
   <section class="media-grid book-list">
     {

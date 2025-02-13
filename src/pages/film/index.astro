@@ -8,12 +8,20 @@ const films = await fetchFilms("asc")
 if (!films.length) {
   throw new Error(`No books found.`)
 }
+
+const pageTitle = `Films | Elmore Leonard`
+const metaDescription = `Explore the films based on the works of Elmore Leonard.`
+const metaKeywords = `Elmore Leonard, films, movies, crime novels, western fiction`
+const metaImage = `${Astro.site}/images/social/el-opengraph.jpg`
 ---
 
 <Layout
   sectionTitle="Film"
   classNames={["film-index"]}
-  pageTitle="Film | Elmore Leonard"
+  pageTitle={pageTitle}
+  metaDescription={metaDescription}
+  metaKeywords={metaKeywords}
+  metaImage={metaImage}
 >
   <section class="media-grid book-list">
     {

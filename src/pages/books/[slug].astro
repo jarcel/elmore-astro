@@ -26,9 +26,10 @@ export async function getStaticPaths() {
 }
 
 const pageTitle = `${book.Title} | Elmore Leonard`
-const metaDescription = `Read about "${book.Title}", a novel by Elmore Leonard, published in ${book.Year}. {book.Synopsis}`
+const metaDescription = `"${book.Title}", a novel by Elmore Leonard, published in ${book.Year}. ${book.Synopsis}`
 const metaKeywords = `Elmore Leonard, ${book.Title}, crime novels, western fiction`
-const metaImage = book.Thumbnail?.url || "/images/social/el-opengraph.jpg"
+const metaImage =
+  book.BillboardImage?.url || `${Astro.site}/images/social/el-opengraph.jpg`
 ---
 
 <Layout

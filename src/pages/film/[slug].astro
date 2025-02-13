@@ -33,9 +33,10 @@ export async function getStaticPaths() {
 }
 
 const pageTitle = `${film.Title} | Elmore Leonard`
-const metaDescription = `Read about "${film.Title}", based on the works of ELmore Leonard, released in ${film.Year}. {film.Synopsis}`
-const metaKeywords = `Elmore Leonard, ${film.Title}, crime novels, western fiction`
-const metaImage = film.BillboardImage?.url || "/images/social/el-opengraph.jpg"
+const metaDescription = `Read about "${film.Title}", based on the works of ELmore Leonard, released in ${film.Year}. ${film.Synopsis}`
+const metaKeywords = `Elmore Leonard, ${film.Title}, crime novels, western fiction, films based on Elmore Leonard`
+const metaImage = film.BillboardImage?.url || `${Astro.site}/images/social/el-opengraph.jpg`
+
 ---
 
 <Layout
