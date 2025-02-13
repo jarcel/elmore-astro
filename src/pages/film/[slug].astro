@@ -31,14 +31,22 @@ export async function getStaticPaths() {
     params: { slug: film.slug },
   }))
 }
+
+const pageTitle = `${film.Title} | Elmore Leonard`
+const metaDescription = `Read about "${film.Title}", based on the works of ELmore Leonard, released in ${film.Year}. {film.Synopsis}`
+const metaKeywords = `Elmore Leonard, ${film.Title}, crime novels, western fiction`
+const metaImage = film.BillboardImage?.url || "/images/social/el-opengraph.jpg"
 ---
 
 <Layout
   sectionTitle="Film"
   classNames={["film", "single-film", film.slug]}
-  pageTitle={`${film.Title} | Elmore Leonard`}
+  pageTitle={pageTitle}
   sectionColor={primaryColor}
   jsonLdData={jsonLd}
+  metaDescription={metaDescription}
+  metaKeywords={metaKeywords}
+  metaImage={metaImage}
 >
   <div class="billboard">
     <picture>

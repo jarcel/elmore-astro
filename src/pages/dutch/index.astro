@@ -43,13 +43,23 @@ const jsonLdData = {
   knowsAbout: ["Crime Fiction", "Western Fiction", "Screenwriting"],
   url: "https://elmoreleonardofficial.com",
 }
+
+const pageTitle = `Dutch | Elmore Leonard`
+const metaDescription =
+  "Elmore Leonard, the legendary crime and western novelist, was born Elmore John Leonard on October 11, 1925 in New Orleans. Forty-five novels later he would be known as one of the greatest and most prolific American writers of modern fiction."
+const metaKeywords =
+  "Elmore Leonard, crime novels, noir fiction, Justified, Get Shorty, crime writer, Western books, American fiction"
+const metaImage = "/images/social/el-opengraph.jpg"
 ---
 
 <Layout
   sectionTitle="Dutch"
   classNames={["dutch"]}
-  pageTitle=`Dutch | Elmore Leonard`
+  pageTitle={pageTitle}
   jsonLdData={jsonLdData}
+  metaDescription={metaDescription}
+  metaKeywords={metaKeywords}
+  metaImage={metaImage}
 >
   <section class="section-wrapper black dutch-bio">
     <h1>The Dickens of Detroit</h1>

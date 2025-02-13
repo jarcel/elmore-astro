@@ -24,14 +24,22 @@ export async function getStaticPaths() {
     params: { slug: book.slug },
   }))
 }
+
+const pageTitle = `${book.Title} | Elmore Leonard`
+const metaDescription = `Read about "${book.Title}", a novel by Elmore Leonard, published in ${book.Year}. {book.Synopsis}`
+const metaKeywords = `Elmore Leonard, ${book.Title}, crime novels, western fiction`
+const metaImage = book.Thumbnail?.url || "/images/social/el-opengraph.jpg"
 ---
 
 <Layout
   sectionTitle="Books"
   classNames={["book", "single-book", book.slug]}
-  pageTitle={`${book.Title} | Elmore Leonard`}
+  pageTitle={pageTitle}
   sectionColor=`${book.PrimaryColor}`
   jsonLdData={jsonLd}
+  metaDescription={metaDescription}
+  metaKeywords={metaKeywords}
+  metaImage={metaImage}
 >
   <div class="billboard">
     <picture>

@@ -4,14 +4,20 @@ import Menu from "../components/Menu.astro"
 
 export interface LayoutProps {
   pageTitle?: string
+  metaDescription?: string
+  metaKeywords?: string
+  metaImage?: string
   sectionTitle?: string
   sectionColor?: string
   classNames?: string[]
-  jsonLdData?: any
+  jsonLdData?: object
 }
 
 const {
   pageTitle,
+  metaDescription = "The official website of Elmore Leonard, the legendary crime and western novelist.",
+  metaKeywords = "Elmore Leonard, crime novels, noir fiction, Justified, Get Shorty, crime writer, Western books, American fiction",
+  metaImage = "/images/social/el-opengraph.jpg",
   sectionTitle = "",
   sectionColor,
   classNames = [],
@@ -32,12 +38,30 @@ const {
       crossorigin="anonymous"
     />
 
+    <!-- Meta Tags -->
     <meta name="generator" content={Astro.generator} />
-    <meta
-      name="keywords"
-      content="Elmore Leonard, crime novels, noir fiction, Justified, Get Shorty, crime writer, Western books, American fiction"
-    />
     <title>{pageTitle}</title>
+    <meta name="description" content={metaDescription} />
+    <meta name="keywords" content={metaKeywords} />
+    <meta name="author" content="Elmore Leonard Estate" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- OpenGraph -->
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:image" content={metaImage} />
+    <meta property="og:url" content="https://elmoreleonardofficial.com" />
+
+    <!-- Twitter -->
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={metaDescription} />
+    <meta name="twitter:image" content={metaImage} />
+
+    <link rel="canonical" href="https://elmoreleonardofficial.com" />
     {
       jsonLdData && (
         <script
