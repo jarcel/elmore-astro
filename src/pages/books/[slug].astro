@@ -218,9 +218,13 @@ const metaImage =
   }
   <!-- /Book Slides -->
   <!-- Covers -->
-  <section class="section-wrapper white">
-    <ImageGallery images={book.BookCovers} title="Alternate Covers" />
-  </section>
+  {
+    book.BookCovers.length > 0 && (
+      <section class="section-wrapper white">
+        <ImageGallery images={book.BookCovers} title="Alternate Covers" />
+      </section>
+    )
+  }
   <!-- /Covers -->
   <!-- Footer Links -->
   <footer>
