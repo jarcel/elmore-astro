@@ -4,6 +4,6 @@ import sitemap from "@astrojs/sitemap"
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://elmore-web-fezsk.ondigitalocean.app",
+  site: "https://elmoreleonardofficial.com",
   integrations: [sitemap()],
 })
