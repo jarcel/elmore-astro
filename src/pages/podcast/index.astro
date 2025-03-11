@@ -1,20 +1,127 @@
 ---
 import Layout from "../../layouts/Layout.astro"
+import InfoWrapper from "../../components/InfoWrapper.astro"
+
+const pageTitle = `The Elmore Leonard Podcast | Elmore Leonard`
+const metaDescription = `The Elmore Leonard Podcast explores the work and life of one of our greatest novelists: Elmore Leonard. We will interview those who knew him and his work best, and also dive deep into the novels, the short stories and the invisible threads that tie them together. If you’ve read the books and seen the adaptations, we've got a lot to talk about. And if you haven’t, get to work. Either way, subscribe to The Elmore Leonard Podcast today.`
+const metaKeywords = `The Elmore Leonard Podcast, Elmore Leonard, crime novels, western fiction, movies, adaptations`
+const metaImage = `${Astro.site}images/podcast/header-podcast.webp`
+const primaryColor = "#000"
 ---
 
 <Layout
-  classNames={["podcast", "podcast-index"]}
-  pageTitle="Podcast | Elmore Leonard | Official Website"
+  sectionTitle="Podcast"
+  classNames={["podcast"]}
+  pageTitle={pageTitle}
+  metaDescription={metaDescription}
+  metaKeywords={metaKeywords}
+  metaImage={metaImage}
 >
-  <div class="podcast-wrapper">
-    <h1>Coming Soon</h1>
-  </div>
+  <div class="billboard"></div>
+  <!-- Book Content -->
+  <section class="section-wrapper white">
+    <InfoWrapper title="The Elmore Leonard Podcast" primaryColor="#000">
+      <div slot="main">
+        <p>
+          The Elmore Leonard Podcast explores the work and life of one of our
+          greatest novelists: Elmore Leonard. We will interview those who knew
+          him and his work best, and also dive deep into the novels, the short
+          stories and the invisible threads that tie them together. If you’ve
+          read the books and seen the adaptations, we've got a lot to talk
+          about. And if you haven’t, get to work. Either way, subscribe to The
+          Elmore Leonard Podcast today.
+        </p>
+      </div>
+      <div slot="side">
+        <h3><strong>Listen & Subscribe</strong></h3>
+        <p>Wherever you get your podcasts:</p>
+        <a
+          class="podcast-link"
+          target="_blank"
+          rel="noref noopener"
+          aria-label="Listen to the Elmore Leonard Podast on Audible"
+          href="https://www.audible.com/podcast/The-Elmore-Leonard-Podcast/B0DZJBVPXD"
+          ><img
+            src="/images/podcast/elmore-podcast-audible-button.webp"
+            alt="Subscribe on Audible"
+          /></a
+        >
+        <a
+          class="podcast-link"
+          target="_blank"
+          rel="noref noopener"
+          aria-label="Listen to the Elmore Leonard Podast on Apple Podcasts"
+          href="https://podcasts.apple.com/us/podcast/the-elmore-leonard-podcast/id1800301714"
+          ><img
+            src="/images/podcast/elmore-podcast-apple-button.webp"
+            alt="Subscribe on Apple Podcasts"
+          /></a
+        >
+        <a
+          class="podcast-link"
+          target="_blank"
+          rel="noref noopener"
+          aria-label="Listen to the Elmore Leonard Podast on Spotify"
+          href="https://open.spotify.com/show/7KPLSwiOTRod66PP7oRSCH"
+          ><img
+            src="/images/podcast/elmore-podcast-spotify-button.webp"
+            alt="Subscribe on Spotify"
+          /></a
+        >
+        <a
+          class="podcast-link"
+          target="_blank"
+          rel="noref noopener"
+          aria-label="Listen to the Elmore Leonard Podast on YouTube"
+          href="https://www.youtube.com/@ElmoreLeonardOfficial"
+          ><img
+            src="/images/podcast/elmore-podcast-youtube-button.webp"
+            alt="Subscribe on YouTube"
+          /></a
+        >
+      </div>
+    </InfoWrapper>
+  </section>
+  <section class="podcast-player-wrapper">
+    <iframe
+      style="border-radius:12px"
+      src="https://open.spotify.com/embed/episode/6r6GwRqmD2fxHji9TuLIYW?utm_source=generator&theme=0"
+      width="100%"
+      height="152"
+      frameborder="0"
+      allowfullscreen=""
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      loading="lazy"></iframe>
+  </section>
 </Layout>
 
-<style lang="scss" scoped>
-  @use "../../styles/variables.scss" as vars;
-  .news-index {
-    min-height: 100vh;
-    background: black;
+<style lang="scss">
+  @use "../../styles/variables.scss" as variables;
+  .billboard {
+    height: 500px;
+    background: #000 url("../../images/podcast/header-podcast.webp") no-repeat
+      center center;
+    background-size: contain;
+    @media screen and (max-width: variables.$screen-md) {
+      height: 400px;
+      background: #000 url("../../images/podcast/header-podcast-mobile.webp")
+        no-repeat center center;
+      background-size: contain;
+    }
+  }
+  .podcast-link {
+    display: block;
+    margin: 1rem 0;
+    img {
+      width: 100%;
+      max-width: 30rem;
+      margin: 0 auto;
+    }
+  }
+  .podcast-player-wrapper {
+    margin-top: 2rem;
+    max-width: 875px;
+    margin: 0 auto;
+    padding: 0 3rem 5rem;
   }
 </style>
